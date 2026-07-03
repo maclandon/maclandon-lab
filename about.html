@@ -55,16 +55,19 @@
     opacity:0;will-change:transform,opacity,filter}
   .lanes3d{position:absolute;inset:30svh 0 6svh;display:flex;align-items:center;justify-content:center;
     perspective:1400px;perspective-origin:50% 40%}
-  .lane{position:absolute;width:min(300px,80vw);border-radius:18px;padding:26px 24px;
+  .lane{position:absolute;width:min(300px,80vw);min-height:212px;border-radius:18px;padding:26px 24px;
     background:#101016;border:1px solid var(--line);box-shadow:0 30px 90px rgba(0,0,0,.55);
-    will-change:transform,opacity,filter;text-align:left}
+    will-change:transform,opacity;text-align:left}
+  .lane>*{will-change:opacity}
   .lane .tag{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin-bottom:10px;display:block}
   .lane h3{font-size:21px;font-weight:800;letter-spacing:-.02em;margin-bottom:8px}
   .lane p{font-size:14px;color:var(--mute);line-height:1.5}
   .lane.l1 .tag{color:#4ea8ff}.lane.l2 .tag{color:#ff8a5c}.lane.l3 .tag{color:#a06bff}
-  .merge{position:absolute;width:min(430px,86vw);border-radius:22px;padding:36px 30px;text-align:center;
-    background:#12121a;border:1px solid rgba(255,255,255,.2);
-    box-shadow:0 40px 120px rgba(90,120,255,.22);opacity:0;will-change:transform,opacity,filter}
+  .merge{position:absolute;width:min(430px,86vw);min-height:304px;border-radius:18px;padding:40px 32px;text-align:center;
+    display:flex;flex-direction:column;justify-content:center;
+    background:#101016;border:1px solid var(--line);
+    box-shadow:0 40px 120px rgba(90,120,255,.22);opacity:0;will-change:transform,opacity}
+  .merge>*{will-change:opacity}
   .merge h3{font-size:clamp(26px,4vw,38px);font-weight:800;letter-spacing:-.025em}
   .merge h3 em{font-style:normal;background:var(--rainbow);background-size:200% 100%;
     -webkit-background-clip:text;background-clip:text;color:transparent;animation:shimmer 9s linear infinite}
@@ -76,6 +79,14 @@
   .reveal{opacity:0;transform:translateY(38px);filter:blur(6px);
     transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1),filter .9s}
   .reveal.in{opacity:1;transform:none;filter:none}
+  .how{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:44px}
+  .how .h-card{border-radius:18px;padding:26px 26px;background:#101016;border:1px solid var(--line);
+    box-shadow:0 24px 70px rgba(0,0,0,.45)}
+  .how .h-card h4{font-size:19px;font-weight:800;letter-spacing:-.015em;margin-bottom:8px}
+  .how .h-card h4 em{font-style:normal;background:var(--rainbow);background-size:200% 100%;
+    -webkit-background-clip:text;background-clip:text;color:transparent;animation:shimmer 9s linear infinite}
+  .how .h-card p{font-size:14.5px;color:var(--mute);line-height:1.6}
+  @media(max-width:760px){.how{grid-template-columns:1fr;gap:10px}}
   .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:44px}
   .stat{border-radius:18px;padding:26px 24px;background:#101016;border:1px solid var(--line);
     box-shadow:0 24px 70px rgba(0,0,0,.45)}
@@ -136,10 +147,23 @@
         <p>849 orders across my own shops. My products, my margins, my problem when something broke at 2am. It made me fast.</p>
       </div>
       <div class="merge" id="merge">
-        <h3>The <em>translator</em>.</h3>
-        <p>Between your business and the tools that grow it. I understand both sides because I have lived both sides.</p>
+        <h3>One person. <em>All three.</em></h3>
+        <p>Your numbers, your story, your store. I run all three at once, so nothing gets built in a silo.</p>
       </div>
     </div>
+  </div>
+</section>
+
+<section class="band">
+  <div class="reveal">
+    <div class="k">How I work</div>
+    <h2>Built into the wiring.</h2>
+  </div>
+  <div class="how">
+    <div class="h-card reveal"><h4>Quiet hours, <em>deep work</em>.</h4><p>My best work happens late, alone, with the door closed. No standups, no performance. Long unbroken hours where the details get the attention they deserve. The craft shows up in the parts most people never notice.</p></div>
+    <div class="h-card reveal"><h4>It's <em>personal</em>.</h4><p>I don't know how to build from a distance. If your business is in my hands, I carry it like it's mine. What goes out into the world with your name on it has my care baked into it, because that's the only way I know how to make things.</p></div>
+    <div class="h-card reveal"><h4>Show, <em>then tell</em>.</h4><p>I'd rather build the thing and put it in front of you than pitch you a deck about it. Proof first, talk second. Every client relationship I have started with something I had already made.</p></div>
+    <div class="h-card reveal"><h4>Deep, <em>not wide</em>.</h4><p>A few clients at a time, known well. I'd rather understand one business completely, how it earns, who it serves, where it leaks, than juggle ten from the surface.</p></div>
   </div>
 </section>
 
@@ -182,20 +206,30 @@ function tick(){
   const ltotal=lanes.offsetHeight-innerHeight;
   lt=clamp(-lanes.getBoundingClientRect().top/(ltotal||1),0,1);
   lp+=(lt-lp)*(reduce?1:0.09);
-  const conv=sstep(0.08,0.55,lp), fold=sstep(0.58,0.72,lp), mIn=sstep(0.66,0.82,lp);
+  /* MORPH: converge to exact overlap -> grow together into the merge box's
+     geometry -> invisible swap (identical rectangles) -> new words fade in.
+     One continuous box, no fade-out/fade-in. */
+  const conv=sstep(0.08,0.52,lp);          /* cards travel to dead center */
+  const grow=sstep(0.55,0.72,lp);          /* the box grows to merge size */
+  const txtOut=sstep(0.55,0.65,lp);        /* lane words leave early */
+  const swap=sstep(0.705,0.755,lp);        /* box swap while shapes match */
+  const txtIn=sstep(0.76,0.86,lp);         /* merge words arrive */
+  const growScale=lerp(1,430/300,grow);
   const spreadX=mobile()?0:34, spreadY=mobile()?30:0;
   const setLane=(el,dir,rot)=>{
     const x=dir*spreadX*(1-conv), y=dir*spreadY*(1-conv);
     const ry=mobile()?0:rot*(1-conv);
-    el.style.transform='translate3d(calc('+x+'vw + '+(conv*dir*10)+'px), calc('+y+'vh + '+(conv*dir*4)+'px),0) rotateY('+ry+'deg) scale('+lerp(1,0.94,fold)+')';
-    el.style.opacity=(1-fold).toFixed(3);
-    el.style.filter='blur('+(fold*6)+'px)';
-    el.style.visibility=fold>=1?'hidden':'visible';
+    el.style.transform='translate3d('+x+'vw,'+y+'vh,0) rotateY('+ry+'deg) scale('+growScale+')';
+    el.style.opacity=(1-swap).toFixed(3);
+    el.style.visibility=swap>=1?'hidden':'visible';
+    for(const kid of el.children)kid.style.opacity=(1-txtOut).toFixed(3);
   };
   setLane(l1,-1,16); setLane(l2,0,0); setLane(l3,1,-16);
-  merge.style.opacity=mIn;
-  merge.style.transform='scale('+lerp(0.86,1,mIn)+') translateY('+((1-mIn)*30)+'px)';
-  merge.style.filter='blur('+((1-mIn)*8)+'px)';
+  /* merge tracks the exact same rectangle the lanes grew into */
+  merge.style.opacity=swap;
+  merge.style.transform='scale('+(growScale*300/430)+')';
+  merge.style.visibility=swap<=0?'hidden':'visible';
+  for(const kid of merge.children)kid.style.opacity=txtIn;
   const centers=[0.16,0.5], half=0.13, zmax=mobile()?200:420;
   lcaps.forEach((c,i)=>{
     let t=clamp((lp-centers[i])/half,-1.35,1.35);
