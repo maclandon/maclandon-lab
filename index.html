@@ -389,6 +389,25 @@ function measureFinal(){
   pairs.forEach(([m,sE,key])=>{const r=sE.getBoundingClientRect();finalRects[key]={x:r.left,y:r.top,w:r.width};});
 }
 addEventListener('resize',()=>{finalRects=null;});
+
+/* Preload the real site while the visitor is still reading the hook,
+   so nothing heavy happens mid-scroll. Keep its videos asleep until
+   the moment of arrival. */
+let siteAwake=false;
+addEventListener('load',()=>{setTimeout(()=>{if(!siteframe.src)siteframe.src='site/index.html';},900);});
+siteframe.addEventListener('load',()=>{wakeSite(false);});
+function wakeSite(on){
+  if(on===siteAwake)return;
+  try{
+    const doc=siteframe.contentDocument;
+    if(!doc)return;
+    doc.querySelectorAll('video').forEach(v=>{
+      if(on){v.play&&v.play().catch(()=>{});}
+      else{v.pause&&v.pause();}
+    });
+    siteAwake=on;
+  }catch(err){}
+}
 document.fonts&&document.fonts.ready.then(()=>{finalRects=null;});
 
 function tick(){
@@ -468,13 +487,13 @@ function tick(){
       sE.style.opacity=Math.min(1,me*2.4);
     });
   }
-  /* the real site loads quietly mid-build, then takes over at the end */
-  if(pM>0.35&&!siteframe.src)siteframe.src='site/index.html';
+  /* the swap to the real site (preloaded at page load, woken here) */
   const swap=sstep(0.982,0.998,target);
   siteframe.style.opacity=swap>0?1:0;
+  siteframe.style.visibility=swap>0?'visible':'hidden';
   sitehero.style.opacity=(bgIn*(1-swap)).toFixed(3);
-  if(swap>=1){sitehero.style.visibility='hidden';siteframe.style.pointerEvents='auto';}
-  else{sitehero.style.visibility='visible';siteframe.style.pointerEvents='none';}
+  if(swap>=1){sitehero.style.visibility='hidden';siteframe.style.pointerEvents='auto';wakeSite(true);}
+  else{sitehero.style.visibility='visible';siteframe.style.pointerEvents='none';wakeSite(false);}
 
   /* the minis hand off as their real versions take over */
   const hand=1-sstep(0.85,0.91,pM);
