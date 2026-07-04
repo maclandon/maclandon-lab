@@ -100,6 +100,8 @@
     box-shadow:0 8px 24px rgba(37,34,30,.10)}
   .mnav .ml{font-family:var(--serif);font-weight:700;font-size:13px;color:var(--site-text)}
   .mnav .mmenu{margin-left:auto;display:flex;gap:11px;font-family:var(--sans);font-size:8.5px;font-weight:500;color:#4c4841;align-items:center}
+  .mham,.sham{display:none}
+  .mcard-photo,.scard-photo{display:none}
   .micn{display:block;opacity:.85}
   .sicn{display:block;opacity:.85}
   .mnav .mp{background:#3a372f;color:#fff;border-radius:980px;padding:4px 10px;font-weight:500;font-size:8px}
@@ -146,17 +148,23 @@
     .frame__url span{font-size:8.5px}
     .screen{height:calc(100% - 26px);border-radius:0 0 21px 21px}
     .wire{inset:12px;gap:9px}
-    .mnav{top:10px;width:88%;height:26px}
-    .mnav .mmenu .mm{display:none}
-    .mcard{left:6%;right:6%;width:auto;top:12%}
-    .mcard h4{font-size:15px}
-    .mstrap{font-size:9px}.mcard p{font-size:8.5px}
-    .mpill{font-size:9px;padding:5px 13px}
-    .mportrait{height:34%;right:0;left:0;bottom:0;display:flex;justify-content:center}
+    .mnav{top:10px;left:50%;width:56%;height:30px;justify-content:space-between;padding:0 13px}
+    .mnav .ml{font-size:15px}
+    .mnav .mmenu{display:none}
+    .mham{display:block;width:14px;height:2px;background:#4c4841;border-radius:2px;position:relative}
+    .mham::before{content:"";position:absolute;left:0;top:-4.5px;width:14px;height:2px;background:#4c4841;border-radius:2px}
+    .mcard{left:5%;right:5%;width:auto;top:13%;bottom:14%;padding:14px 13px;overflow:hidden}
+    .mcard h4{font-size:16px;max-width:58%}
+    .meyebrow{font-size:6.5px}
+    .mstrap{font-size:8.5px;max-width:55%}
+    .mcard p{display:none}
+    .mpill{font-size:9px;padding:6px 13px;position:relative;z-index:2;margin-top:10px}
+    .mcard-photo{display:block;position:absolute;right:-6%;bottom:0;height:88%;width:auto;z-index:1}
+    .mportrait{display:none!important}
     .mchecks{display:none}
-    .mlive{top:44px;left:6%}
-    .msys{width:82%;bottom:10px;z-index:5}
-    .mfoot{display:none}
+    .mlive{top:46px;left:6%}
+    .msys{display:none!important}
+    .mfoot{left:5%;bottom:5%;display:block}
   }
 
   /* ===== THE REAL SITE (you land inside it) ===== */
@@ -195,12 +203,20 @@
   .sportrait img{height:100%;width:auto;display:block;filter:drop-shadow(0 16px 44px rgba(37,34,30,.16))}
   .sfoot{position:absolute;left:4vw;bottom:26px;font-size:11.5px;font-weight:700;letter-spacing:.16em;color:#8a8478}
   @media(max-width:900px){
-    .sgrid{grid-template-columns:1fr;align-items:start;padding:92px 5vw 0}
-    .scard{position:relative;z-index:2}
-    .snav .links span,.snav .links .sicn{display:none}
-    .snav .links .bp{display:inline-block}
-    .sportrait{right:50%;transform:translateX(50%);height:min(34svh,320px);z-index:1}
-    .sfoot{display:none}
+    .sgrid{grid-template-columns:1fr;align-items:start;padding:96px 4vw 0}
+    .snav{width:56%;min-width:210px;height:56px;gap:0;justify-content:space-between;padding:0 20px}
+    .snav .ml{font-size:26px}
+    .snav .links{display:none}
+    .sham{display:block;width:20px;height:2.5px;background:#4c4841;border-radius:2px;position:relative}
+    .sham::before{content:"";position:absolute;left:0;top:-6.5px;width:20px;height:2.5px;background:#4c4841;border-radius:2px}
+    .scard{position:relative;z-index:2;overflow:hidden;min-height:60svh}
+    .scard h1{font-size:clamp(28px,8vw,36px);max-width:58%}
+    .sstrap{max-width:52%}
+    .scard p{display:none}
+    .spill{position:relative;z-index:2}
+    .scard-photo{display:block;position:absolute;right:-8%;bottom:0;height:74%;width:auto;z-index:1}
+    .sportrait{display:none}
+    .sfoot{display:block;position:relative;left:auto;bottom:auto;margin:26px 4vw 0}
   }
 
   /* ===== normal site sections below (light) ===== */
@@ -306,7 +322,7 @@
 
           <div class="lyr mnav" id="mnav" data-in="0.35" style="transform:translateX(-50%)">
             <div class="ml">ML</div>
-            <div class="mmenu"><span class="mm">Services</span><span class="mm">Pricing</span><span class="mm">About</span><span class="mm">Blog</span><span class="mm">Audit</span><svg class="micn" viewBox="0 0 24 24" width="9" height="9"><rect x="2" y="2" width="20" height="20" rx="5" fill="none" stroke="#4c4841" stroke-width="2.4"/><text x="12" y="16.5" text-anchor="middle" font-size="11" font-weight="700" fill="#4c4841" font-family="DM Sans,sans-serif">in</text></svg><svg class="micn" viewBox="0 0 24 24" width="9" height="9"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5" fill="none" stroke="#4c4841" stroke-width="2.2"/><circle cx="12" cy="12" r="4.4" fill="none" stroke="#4c4841" stroke-width="2.2"/><circle cx="17.6" cy="6.6" r="1.5" fill="#4c4841"/></svg><span class="mp">Book a Call</span></div>
+            <span class="mham"></span><div class="mmenu"><span class="mm">Services</span><span class="mm">Pricing</span><span class="mm">About</span><span class="mm">Blog</span><span class="mm">Audit</span><svg class="micn" viewBox="0 0 24 24" width="9" height="9"><rect x="2" y="2" width="20" height="20" rx="5" fill="none" stroke="#4c4841" stroke-width="2.4"/><text x="12" y="16.5" text-anchor="middle" font-size="11" font-weight="700" fill="#4c4841" font-family="DM Sans,sans-serif">in</text></svg><svg class="micn" viewBox="0 0 24 24" width="9" height="9"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5" fill="none" stroke="#4c4841" stroke-width="2.2"/><circle cx="12" cy="12" r="4.4" fill="none" stroke="#4c4841" stroke-width="2.2"/><circle cx="17.6" cy="6.6" r="1.5" fill="#4c4841"/></svg><span class="mp">Book a Call</span></div>
           </div>
 
           <div class="lyr mportrait" id="mportrait" data-in="0.48"><img src="assets/mac-hero.png" alt=""></div>
@@ -317,6 +333,7 @@
             <div class="mstrap">I find what's broken and build what's missing.</div>
             <p>I build the websites, intake systems, and automations that let solo practices and small firms run without the owner in the middle of everything.</p>
             <div class="mpill">See if we're a fit &rarr;</div>
+            <img class="mcard-photo" src="assets/mac-hero.png" alt="">
           </div>
 
           <div class="lyr mfoot" data-in="0.56">— IS THIS RIGHT FOR YOU</div>
@@ -335,11 +352,11 @@
     </div>
 
     <!-- the REAL site, ready beneath the overlay -->
-    <iframe class="siteframe" id="siteframe" title="maclandon.com" loading="lazy"></iframe>
+    <iframe class="siteframe" id="siteframe" title="maclandon.com"></iframe>
     <div class="sitehero" id="sitehero">
       <div class="snav" id="snav">
         <div class="ml">ML</div>
-        <div class="links"><span>Services</span><span>Pricing</span><span>About</span><span>Blog</span><span>Audit</span><svg class="sicn" viewBox="0 0 24 24" width="16" height="16"><rect x="2" y="2" width="20" height="20" rx="5" fill="none" stroke="#4c4841" stroke-width="2.4"/><text x="12" y="16.5" text-anchor="middle" font-size="11" font-weight="700" fill="#4c4841" font-family="DM Sans,sans-serif">in</text></svg><svg class="sicn" viewBox="0 0 24 24" width="16" height="16"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5" fill="none" stroke="#4c4841" stroke-width="2.2"/><circle cx="12" cy="12" r="4.4" fill="none" stroke="#4c4841" stroke-width="2.2"/><circle cx="17.6" cy="6.6" r="1.5" fill="#4c4841"/></svg><span class="bp">Book a Call</span></div>
+        <span class="sham"></span><div class="links"><span>Services</span><span>Pricing</span><span>About</span><span>Blog</span><span>Audit</span><svg class="sicn" viewBox="0 0 24 24" width="16" height="16"><rect x="2" y="2" width="20" height="20" rx="5" fill="none" stroke="#4c4841" stroke-width="2.4"/><text x="12" y="16.5" text-anchor="middle" font-size="11" font-weight="700" fill="#4c4841" font-family="DM Sans,sans-serif">in</text></svg><svg class="sicn" viewBox="0 0 24 24" width="16" height="16"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5" fill="none" stroke="#4c4841" stroke-width="2.2"/><circle cx="12" cy="12" r="4.4" fill="none" stroke="#4c4841" stroke-width="2.2"/><circle cx="17.6" cy="6.6" r="1.5" fill="#4c4841"/></svg><span class="bp">Book a Call</span></div>
       </div>
       <div class="sportrait" id="sportrait"><img src="assets/mac-hero.png" alt="Mac Landon"></div>
       <div class="sgrid">
@@ -349,6 +366,7 @@
           <div class="sstrap">I find what's broken and build what's missing.</div>
           <p>I build the websites, intake systems, and automations that let solo practices and small firms run without the owner in the middle of everything. Tax, healthcare, e-commerce, creative services.</p>
           <span class="spill">See if we're a fit &rarr;</span>
+          <img class="scard-photo" src="assets/mac-hero.png" alt="">
         </div>
         <div></div>
       </div>
@@ -378,6 +396,9 @@ const capCenters=[0.055,0.21,0.375,0.535,0.69,0.80], capHalf=0.08;
 const cold=[9,10,15], warm=[20,13,10], end=[239,235,228]; /* settles to the site's cream */
 
 addEventListener('mousemove',e=>{mx=(e.clientX/innerWidth-0.5)*2;my=(e.clientY/innerHeight-0.5)*2;},{passive:true});
+
+/* preload the real site while the visitor reads the hook */
+setTimeout(()=>{if(!siteframe.src)siteframe.src='site/index.html';},1200);
 
 
 function tick(){
@@ -438,14 +459,20 @@ function tick(){
   });
 
   /* you arrive INSIDE the site: the wallpaper fades up under the dive... */
-  const bgIn=sstep(0.83,0.92,pM);
-  sitehero.style.opacity=bgIn;
-  sitehero.style.pointerEvents='none';
-
   /* simple arrival: the site fades and settles in as you dive through */
+  const bgIn=sstep(0.83,0.92,pM);
   const rIn=sstep(0.86,0.97,pM);
   sitehero.style.transform='scale('+lerp(1.1,1,rIn)+')';
   sitehero.style.filter=rIn<1?'blur('+((1-rIn)*8)+'px)':'none';
+  sitehero.style.pointerEvents='none';
+
+  /* ...then the recreation hands off to the REAL site */
+  if(pM>0.3&&!siteframe.src)siteframe.src='site/index.html';
+  const swap=sstep(0.955,0.99,target);
+  siteframe.style.opacity=swap>0?1:0;
+  siteframe.style.pointerEvents=swap>=1?'auto':'none';
+  sitehero.style.opacity=(bgIn*(1-swap)).toFixed(3);
+  sitehero.style.visibility=swap>=1?'hidden':'visible';
 
   /* intro chrome dissolves as you enter the site */
   nav.style.opacity=(1-sstep(0.84,0.92,pM)).toFixed(3);
