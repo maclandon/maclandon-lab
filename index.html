@@ -168,7 +168,7 @@
   }
 
   /* ===== THE REAL SITE (you land inside it) ===== */
-  .siteframe{position:absolute;inset:0;z-index:3;width:100%;height:100%;border:0;opacity:0;background:#EFEBE4}
+  .siteframe{position:absolute;inset:0;z-index:3;width:100%;height:100%;border:0;opacity:0;background:#EFEBE4;pointer-events:none}
   .sitehero{position:absolute;inset:0;z-index:4;opacity:0;will-change:opacity,transform,filter;pointer-events:none;
     background:
       radial-gradient(55% 50% at 12% 8%,rgba(235,185,205,.5),transparent 65%),
@@ -485,11 +485,11 @@ requestAnimationFrame(tick);
 
 /* SNAP TO THE NEAREST BEAT: when scrolling pauses mid-stage, glide to the
    beat the user was headed toward, so captions never rest half-faded. */
-let idleTimer=null, snapAnim=null, lastY=scrollY, lastDir=1, restY=scrollY;
+let idleTimer=null, snapAnim=null, lastY=scrollY, lastDir=1, restY=scrollY, touching=false;
 const snapPoints=[0.055,0.21,0.375,0.535,0.69,0.80,1];
 function cancelSnap(){if(snapAnim){cancelAnimationFrame(snapAnim);snapAnim=null;}}
 function doSnap(){
-  if(reduce)return;
+  if(reduce||touching)return;
   const total=stage.offsetHeight-innerHeight;
   const cur=clamp(-stage.getBoundingClientRect().top/(total||1),0,1);
   if(cur<=0.002||cur>=0.998)return;
@@ -499,13 +499,13 @@ function doSnap(){
   if(bd<=0.02&&nudged){ /* still near a beat but they pushed: carry them to the next one */
     const ahead=snapPoints.filter(p=>lastDir>0?p>best+0.001:p<best-0.001);
     if(ahead.length){let nb=null,nd=1e9;for(const p of ahead){const d=Math.abs(p-cur);if(d<nd){nd=d;nb=p;}}
-      if(nd<0.30){best=nb;bd=nd;}}
+      if(nd<0.16){best=nb;bd=nd;}}
   }else if(bd>0.02){ /* between beats: honor the direction they were headed */
     const ahead=snapPoints.filter(p=>lastDir>0?p>cur:p<cur);
     if(ahead.length){let nb=ahead[0],nd=1e9;for(const p of ahead){const d=Math.abs(p-cur);if(d<nd){nd=d;nb=p;}}
-      if(nd<0.30){best=nb;bd=nd;}}
+      if(nd<0.16){best=nb;bd=nd;}}
   }
-  if(bd<0.004||bd>0.30)return;
+  if(bd<0.004||bd>0.16){restY=scrollY;return;}
   const from=scrollY,to=stage.offsetTop+best*total,t0=performance.now(),dur=Math.min(850,300+bd*2600);
   const step=n=>{const k=Math.min(1,(n-t0)/dur),e2=1-Math.pow(1-k,3);
     scrollTo(0,from+(to-from)*e2);
@@ -515,9 +515,12 @@ function doSnap(){
 addEventListener('scroll',()=>{
   const y=scrollY;if(Math.abs(y-lastY)>1)lastDir=y>lastY?1:-1;lastY=y;
   if(snapAnim)return;
-  clearTimeout(idleTimer);idleTimer=setTimeout(doSnap,110);
+  clearTimeout(idleTimer);if(!touching)idleTimer=setTimeout(doSnap,150);
 },{passive:true});
-['wheel','touchstart'].forEach(ev=>addEventListener(ev,()=>{cancelSnap();},{passive:true}));
+addEventListener('touchstart',()=>{touching=true;cancelSnap();clearTimeout(idleTimer);},{passive:true});
+addEventListener('touchmove',()=>{cancelSnap();},{passive:true});
+addEventListener('touchend',()=>{touching=false;clearTimeout(idleTimer);idleTimer=setTimeout(doSnap,260);},{passive:true});
+addEventListener('wheel',()=>{cancelSnap();},{passive:true});
 
 document.getElementById('worklink').addEventListener('click',e=>{
   e.preventDefault();
