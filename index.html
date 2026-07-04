@@ -20,7 +20,8 @@
   :root{
     --ink:#f4f4f7;--mute:#9a9aa3;--line:rgba(255,255,255,.12);
     --accent:#2997ff;
-    --rainbow:linear-gradient(100deg,#ff5e6c,#ff8a5c,#ffd166,#5ad1a5,#4ea8ff,#a06bff,#ff6bd6);
+    /* cyclic gradient: ends where it starts, so the shimmer loop has no seam */
+    --rainbow:linear-gradient(100deg,#ff5e6c,#ff8a5c,#ffd166,#5ad1a5,#4ea8ff,#a06bff,#ff6bd6,#ff5e6c);
     /* real maclandon.com brand */
     --site-bg:#EFEBE4;--site-card:rgba(252,250,246,.78);--site-text:#25221E;
     --site-mid:#5a554c;--site-muted:#8a8478;--site-blue:#7fa0c3;--site-blue2:#4a7ab0;
@@ -39,7 +40,10 @@
   .nav .links{display:flex;gap:22px;align-items:center;font-size:14px}
   .nav .links a{color:var(--mute);text-decoration:none;padding:6px 2px}
   .nav .links a:hover{color:var(--ink)}
-  .nav .pill{background:var(--accent);color:#fff;padding:7px 16px;border-radius:980px;font-weight:500}
+  .nav .links a.pill{background:rgba(41,151,255,.16);border:1px solid rgba(41,151,255,.45);color:#eaf3ff;
+    padding:7px 16px;border-radius:980px;font-weight:600;font-size:13.5px;letter-spacing:.01em;
+    transition:background .25s,border-color .25s}
+  .nav .links a.pill:hover{background:rgba(41,151,255,.32);border-color:rgba(41,151,255,.7);color:#fff}
   @media(max-width:640px){.nav .links a.hide-m{display:none}}
 
   /* ===== THE STAGE ===== */
@@ -162,10 +166,13 @@
       radial-gradient(55% 50% at 80% 95%,rgba(200,180,225,.3),transparent 65%),
       var(--site-bg);
     font-family:var(--sans);color:var(--site-text)}
-  .snav{position:absolute;top:22px;left:50%;transform:translateX(-50%);width:min(880px,92vw);height:52px;
+  .snav{position:absolute;top:22px;left:0;right:0;margin:0 auto;width:min(880px,92vw);height:52px;
     display:flex;align-items:center;gap:22px;padding:0 10px 0 26px;
     background:rgba(180,175,168,.38);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
-    border:1px solid rgba(255,255,255,.45);border-radius:980px;box-shadow:0 10px 34px rgba(37,34,30,.12)}
+    border:1px solid rgba(255,255,255,.45);border-radius:980px;box-shadow:0 10px 34px rgba(37,34,30,.12);
+    will-change:transform,opacity;transform-origin:0 0}
+  .scard{will-change:transform,opacity;transform-origin:0 0}
+  .sportrait{will-change:transform,opacity;transform-origin:0 0}
   .snav .ml{font-family:var(--serif);font-weight:700;font-size:22px}
   .snav .links{margin-left:auto;display:flex;gap:20px;align-items:center;font-size:13.5px;font-weight:500;color:#4c4841}
   .snav .links span{cursor:pointer}
@@ -294,14 +301,14 @@
             <div class="w-row"><b></b><b></b><b></b></div>
           </div>
 
-          <div class="lyr mnav" data-in="0.35" style="transform:translateX(-50%)">
+          <div class="lyr mnav" id="mnav" data-in="0.35" style="transform:translateX(-50%)">
             <div class="ml">ML</div>
             <div class="mmenu"><span class="mm">Services</span><span class="mm">Pricing</span><span class="mm">About</span><span class="mm">Blog</span><span class="mp">Book a Call</span></div>
           </div>
 
-          <div class="lyr mportrait" data-in="0.48"><img src="assets/mac-hero.png" alt=""></div>
+          <div class="lyr mportrait" id="mportrait" data-in="0.48"><img src="assets/mac-hero.png" alt=""></div>
 
-          <div class="lyr mcard" data-in="0.51">
+          <div class="lyr mcard" id="mcard" data-in="0.51">
             <div class="meyebrow">— WEBSITES · SYSTEMS · AUTOMATION</div>
             <h4>Your business is <i>good.</i><br>Your systems aren't keeping up.</h4>
             <div class="mstrap">I find what's broken and build what's missing.</div>
@@ -326,13 +333,13 @@
 
     <!-- you land INSIDE the real site -->
     <div class="sitehero" id="sitehero">
-      <div class="snav">
+      <div class="snav" id="snav">
         <div class="ml">ML</div>
         <div class="links"><span>Services</span><span>Pricing</span><span>About</span><span>Blog</span><span>Audit</span><span class="bp">Book a Call</span></div>
       </div>
-      <div class="sportrait"><img src="assets/mac-hero.png" alt="Mac Landon"></div>
+      <div class="sportrait" id="sportrait"><img src="assets/mac-hero.png" alt="Mac Landon"></div>
       <div class="sgrid">
-        <div class="scard">
+        <div class="scard" id="scard">
           <div class="seyebrow">— WEBSITES · SYSTEMS · AUTOMATION</div>
           <h1>Your business is <i>good.</i><br>Your systems aren't keeping up.</h1>
           <div class="sstrap">I find what's broken and build what's missing.</div>
@@ -398,6 +405,8 @@ const stage=document.getElementById('stage'), pin=document.getElementById('pin')
       wire=document.getElementById('wire'), nav=document.getElementById('nav'),
       sheen=document.getElementById('sheen'), urltext=document.getElementById('urltext'),
       paper=document.getElementById('paper'), sitehero=document.getElementById('sitehero'),
+      mnavEl=document.getElementById('mnav'), mcardEl=document.getElementById('mcard'), mportraitEl=document.getElementById('mportrait'),
+      snavEl=document.getElementById('snav'), scardEl=document.getElementById('scard'), sportraitEl=document.getElementById('sportrait'),
       caps=[...document.querySelectorAll('.cap')],
       layers=[...document.querySelectorAll('.lyr[data-in]')];
 
@@ -407,6 +416,18 @@ const capCenters=[0.055,0.21,0.375,0.535,0.69,0.80], capHalf=0.08;
 const cold=[9,10,15], warm=[20,13,10], end=[239,235,228]; /* settles to the site's cream */
 
 addEventListener('mousemove',e=>{mx=(e.clientX/innerWidth-0.5)*2;my=(e.clientY/innerHeight-0.5)*2;},{passive:true});
+
+/* SHARED-ELEMENT MORPH: final layout rects of the real site's nav/card/portrait */
+const pairs=[[mnavEl,snavEl,'nav'],[mcardEl,scardEl,'card'],[mportraitEl,sportraitEl,'portrait']];
+let finalRects=null;
+function measureFinal(){
+  const wasOp=sitehero.style.opacity;
+  pairs.forEach(([m,sE])=>sE.style.transform='none');
+  finalRects={};
+  pairs.forEach(([m,sE,key])=>{const r=sE.getBoundingClientRect();finalRects[key]={x:r.left,y:r.top,w:r.width};});
+}
+addEventListener('resize',()=>{finalRects=null;});
+document.fonts&&document.fonts.ready.then(()=>{finalRects=null;});
 
 function tick(){
   const total=stage.offsetHeight-innerHeight;
@@ -465,12 +486,31 @@ function tick(){
     c.style.visibility=o<=0?'hidden':'visible';
   });
 
-  /* you arrive INSIDE the site: it settles from a slight zoom, like your eyes focusing */
-  const rIn=sstep(0.88,0.975,pM);
-  sitehero.style.opacity=Math.min(1,rIn*1.5);
-  sitehero.style.transform='scale('+lerp(1.14,1,rIn)+')';
-  sitehero.style.filter='blur('+((1-rIn)*10)+'px)';
-  sitehero.style.pointerEvents=rIn>0.7?'auto':'none';
+  /* you arrive INSIDE the site: the wallpaper fades up under the dive... */
+  const bgIn=sstep(0.83,0.92,pM);
+  sitehero.style.opacity=bgIn;
+  sitehero.style.pointerEvents=pM>0.93?'auto':'none';
+
+  /* ...and the mini elements BECOME the real ones (shared-element morph) */
+  const me=sstep(0.845,0.965,pM);
+  if(me>0&&!finalRects)measureFinal();
+  if(finalRects){
+    if(me<=0){pairs.forEach(([m,sE])=>{sE.style.opacity=0;sE.style.transform='none';});}
+    else if(me>=1){pairs.forEach(([m,sE])=>{sE.style.opacity=1;sE.style.transform='none';});}
+    else pairs.forEach(([m,sE,key])=>{
+      const fr=finalRects[key];
+      if(!fr||!fr.w){sE.style.opacity=me;sE.style.transform='none';return;}
+      const mr=m.getBoundingClientRect();
+      const cw=lerp(mr.width,fr.w,me), cx=lerp(mr.left,fr.x,me), cy=lerp(mr.top,fr.y,me);
+      sE.style.transform='translate('+(cx-fr.x).toFixed(2)+'px,'+(cy-fr.y).toFixed(2)+'px) scale('+(cw/fr.w).toFixed(4)+')';
+      sE.style.opacity=Math.min(1,me*2.4);
+    });
+  }
+  /* the minis hand off as their real versions take over */
+  const hand=1-sstep(0.85,0.91,pM);
+  [mnavEl,mcardEl,mportraitEl].forEach(el=>{
+    el.style.opacity=(parseFloat(el.style.opacity||'1')*hand).toFixed(3);
+  });
 
   /* intro chrome dissolves as you enter the site */
   nav.style.opacity=(1-sstep(0.84,0.92,pM)).toFixed(3);
@@ -495,6 +535,37 @@ document.querySelectorAll('.tile').forEach(tl=>{
   });
   tl.addEventListener('mouseleave',()=>{inn.style.transform='rotateY(0) rotateX(0)';});
 });
+
+/* SNAP TO THE NEAREST BEAT: when scrolling pauses mid-stage, glide to the
+   beat the user was headed toward, so captions never rest half-faded. */
+let idleTimer=null, snapAnim=null, lastY=scrollY, lastDir=1;
+const snapPoints=[0.055,0.21,0.375,0.535,0.69,0.80,1];
+function cancelSnap(){if(snapAnim){cancelAnimationFrame(snapAnim);snapAnim=null;}}
+function doSnap(){
+  if(reduce)return;
+  const total=stage.offsetHeight-innerHeight;
+  const cur=clamp(-stage.getBoundingClientRect().top/(total||1),0,1);
+  if(cur<=0.002||cur>=0.998)return;
+  let best=null,bd=1e9;
+  for(const p of snapPoints){const d=Math.abs(p-cur);if(d<bd){bd=d;best=p;}}
+  if(bd>0.02){ /* between beats: honor the direction they were headed */
+    const ahead=snapPoints.filter(p=>lastDir>0?p>cur:p<cur);
+    if(ahead.length){let nb=ahead[0],nd=1e9;for(const p of ahead){const d=Math.abs(p-cur);if(d<nd){nd=d;nb=p;}}
+      if(nd<0.13){best=nb;bd=nd;}}
+  }
+  if(bd<0.004||bd>0.13)return;
+  const from=scrollY,to=stage.offsetTop+best*total,t0=performance.now(),dur=700;
+  const step=n=>{const k=Math.min(1,(n-t0)/dur),e2=1-Math.pow(1-k,3);
+    scrollTo(0,from+(to-from)*e2);
+    if(k<1)snapAnim=requestAnimationFrame(step);else snapAnim=null;};
+  cancelSnap();snapAnim=requestAnimationFrame(step);
+}
+addEventListener('scroll',()=>{
+  const y=scrollY;if(Math.abs(y-lastY)>1)lastDir=y>lastY?1:-1;lastY=y;
+  if(snapAnim)return;
+  clearTimeout(idleTimer);idleTimer=setTimeout(doSnap,230);
+},{passive:true});
+['wheel','touchstart'].forEach(ev=>addEventListener(ev,()=>{cancelSnap();},{passive:true}));
 
 document.getElementById('worklink').addEventListener('click',e=>{
   e.preventDefault();

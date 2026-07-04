@@ -14,7 +14,7 @@
   :root{
     --ink:#f4f4f7;--mute:#9a9aa3;--line:rgba(255,255,255,.12);
     --accent:#2997ff;
-    --rainbow:linear-gradient(100deg,#ff5e6c,#ff8a5c,#ffd166,#5ad1a5,#4ea8ff,#a06bff,#ff6bd6);
+    --rainbow:linear-gradient(100deg,#ff5e6c,#ff8a5c,#ffd166,#5ad1a5,#4ea8ff,#a06bff,#ff6bd6,#ff5e6c);
     --maxw:1040px;
   }
   *{margin:0;padding:0;box-sizing:border-box}
@@ -29,11 +29,20 @@
   .nav .links{display:flex;gap:22px;align-items:center;font-size:14px}
   .nav .links a{color:var(--mute);text-decoration:none;padding:6px 2px}
   .nav .links a:hover{color:var(--ink)}
-  .nav .pill{background:var(--accent);color:#fff;padding:7px 16px;border-radius:980px;font-weight:500}
+  .nav .links a.pill{background:rgba(41,151,255,.16);border:1px solid rgba(41,151,255,.45);color:#eaf3ff;
+    padding:7px 16px;border-radius:980px;font-weight:600;font-size:13.5px;letter-spacing:.01em;
+    transition:background .25s,border-color .25s}
+  .nav .links a.pill:hover{background:rgba(41,151,255,.32);border-color:rgba(41,151,255,.7);color:#fff}
   @media(max-width:640px){.nav .links a.hide-m{display:none}}
 
-  .hero{min-height:78svh;display:flex;flex-direction:column;align-items:center;justify-content:center;
-    text-align:center;padding:110px 24px 40px;position:relative}
+  .hero{min-height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;
+    text-align:center;padding:110px 24px 40px;position:relative;overflow:hidden}
+  .herovid{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;
+    opacity:.14;filter:saturate(.7) contrast(1.05)}
+  .hero::after{content:"";position:absolute;inset:0;z-index:1;
+    background:radial-gradient(80% 70% at 50% 45%,transparent 30%,rgba(7,7,9,.88) 82%),
+               linear-gradient(180deg,rgba(7,7,9,.55),transparent 30%,transparent 68%,#070709)}
+  .hero h1,.hero p,.hero .cue{position:relative;z-index:2}
   .hero h1{font-size:clamp(42px,8vw,100px);font-weight:800;letter-spacing:-.04em;line-height:1.02}
   .hero h1 em{font-style:normal;background:var(--rainbow);background-size:200% 100%;
     -webkit-background-clip:text;background-clip:text;color:transparent;animation:shimmer 9s linear infinite}
@@ -119,6 +128,7 @@
 </nav>
 
 <header class="hero">
+  <video class="herovid" autoplay muted loop playsinline src="assets/subway.mp4"></video>
   <h1>Hi, I'm <em>Mac</em>.</h1>
   <p>I build websites, brands, and the systems behind them for small businesses. All of it, myself.</p>
   <div class="cue"></div>
