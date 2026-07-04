@@ -268,6 +268,42 @@ function tick(){
 }
 requestAnimationFrame(tick);
 
+/* SNAP TO BEAT (lanes stage): a pause or a nudge carries you to the next
+   readable moment: caption one, caption two, the merged card. */
+let idleTimer=null,snapAnim=null,lastY=scrollY,lastDir=1,restY=scrollY;
+const snapPoints=[0.16,0.5,0.84];
+function cancelSnap(){if(snapAnim){cancelAnimationFrame(snapAnim);snapAnim=null;}}
+function doSnap(){
+  if(reduce)return;
+  const total=lanes.offsetHeight-innerHeight;
+  const cur=clamp(-lanes.getBoundingClientRect().top/(total||1),0,1);
+  if(cur<=0.02||cur>=0.97)return;
+  let best=null,bd=1e9;
+  for(const p of snapPoints){const d=Math.abs(p-cur);if(d<bd){bd=d;best=p;}}
+  const nudged=Math.abs(scrollY-restY)>24;
+  if(bd<=0.02&&nudged){
+    const ahead=snapPoints.filter(p=>lastDir>0?p>best+0.001:p<best-0.001);
+    if(ahead.length){let nb=null,nd=1e9;for(const p of ahead){const d=Math.abs(p-cur);if(d<nd){nd=d;nb=p;}}
+      if(nd<0.5){best=nb;bd=nd;}}
+  }else if(bd>0.02){
+    const ahead=snapPoints.filter(p=>lastDir>0?p>cur:p<cur);
+    if(ahead.length){let nb=ahead[0],nd=1e9;for(const p of ahead){const d=Math.abs(p-cur);if(d<nd){nd=d;nb=p;}}
+      if(nd<0.5){best=nb;bd=nd;}}
+  }
+  if(bd<0.004||bd>0.5)return;
+  const from=scrollY,to=lanes.offsetTop+best*total,t0=performance.now(),dur=Math.min(850,300+bd*2200);
+  const step=n=>{const k=Math.min(1,(n-t0)/dur),e2=1-Math.pow(1-k,3);
+    scrollTo(0,from+(to-from)*e2);
+    if(k<1)snapAnim=requestAnimationFrame(step);else{snapAnim=null;restY=scrollY;}};
+  cancelSnap();snapAnim=requestAnimationFrame(step);
+}
+addEventListener('scroll',()=>{
+  const y=scrollY;if(Math.abs(y-lastY)>1)lastDir=y>lastY?1:-1;lastY=y;
+  if(snapAnim)return;
+  clearTimeout(idleTimer);idleTimer=setTimeout(doSnap,110);
+},{passive:true});
+['wheel','touchstart'].forEach(ev=>addEventListener(ev,()=>{cancelSnap();},{passive:true}));
+
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.2});
 document.querySelectorAll('.reveal').forEach((el,i)=>{el.style.transitionDelay=((i%3)*0.08)+'s';io.observe(el);});
 </script>
