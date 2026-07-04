@@ -219,6 +219,11 @@ const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 const sstep=(a,b,x)=>{const t=clamp((x-a)/(b-a),0,1);return t*t*(3-2*t);};
 const lerp=(a,b,t)=>a+(b-a)*t;
 const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+const coarse=matchMedia('(pointer:coarse)').matches;
+/* iOS toolbar collapse changes innerHeight mid-scroll and makes every
+   scroll-driven transform jump; only accept big (orientation) changes */
+let VH=innerHeight;
+addEventListener('resize',()=>{if(Math.abs(innerHeight-VH)>150)VH=innerHeight;});
 const mobile=()=>innerWidth<=740;
 
 const lanes=document.getElementById('lanes'),
@@ -228,7 +233,7 @@ const lanes=document.getElementById('lanes'),
 let lt=0,lp=0;
 
 function tick(){
-  const ltotal=lanes.offsetHeight-innerHeight;
+  const ltotal=lanes.offsetHeight-VH;
   lt=clamp(-lanes.getBoundingClientRect().top/(ltotal||1),0,1);
   lp+=(lt-lp)*(reduce?1:0.09);
   /* MORPH: converge to exact overlap -> grow together into the merge box's
@@ -261,7 +266,7 @@ function tick(){
     const o=clamp(1-Math.abs(t)*1.1,0,1);
     c.style.opacity=o.toFixed(3);
     c.style.transform='translateZ('+(t*zmax)+'px) translateY('+(t*-12)+'px)';
-    c.style.filter='blur('+(Math.abs(t)*4).toFixed(2)+'px)';
+    c.style.filter=coarse?'none':'blur('+(Math.abs(t)*4).toFixed(2)+'px)';
     c.style.visibility=o<=0?'hidden':'visible';
   });
   requestAnimationFrame(tick);
@@ -274,8 +279,8 @@ let idleTimer=null,snapAnim=null,lastY=scrollY,lastDir=1,restY=scrollY,touching=
 const snapPoints=[0.16,0.5,0.84];
 function cancelSnap(){if(snapAnim){cancelAnimationFrame(snapAnim);snapAnim=null;}}
 function doSnap(){
-  if(reduce||touching)return;
-  const total=lanes.offsetHeight-innerHeight;
+  if(reduce||coarse||touching)return;
+  const total=lanes.offsetHeight-VH;
   const cur=clamp(-lanes.getBoundingClientRect().top/(total||1),0,1);
   if(cur<=0.02||cur>=0.97)return;
   let best=null,bd=1e9;

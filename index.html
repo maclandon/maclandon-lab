@@ -168,7 +168,7 @@
   }
 
   /* ===== THE REAL SITE (you land inside it) ===== */
-  .siteframe{position:absolute;inset:0;z-index:3;width:100%;height:100%;border:0;opacity:0;background:#EFEBE4;pointer-events:none}
+  .siteframe{position:absolute;inset:0;z-index:3;width:100%;height:100%;border:0;opacity:0;background:#EFEBE4;pointer-events:none;display:none}
   .sitehero{position:absolute;inset:0;z-index:4;opacity:0;will-change:opacity,transform,filter;pointer-events:none;
     background:
       radial-gradient(55% 50% at 12% 8%,rgba(235,185,205,.5),transparent 65%),
@@ -380,6 +380,11 @@ const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 const sstep=(a,b,x)=>{const t=clamp((x-a)/(b-a),0,1);return t*t*(3-2*t);};
 const lerp=(a,b,t)=>a+(b-a)*t;
 const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+const coarse=matchMedia('(pointer:coarse)').matches;
+/* iOS toolbar collapse changes innerHeight mid-scroll and makes every
+   scroll-driven transform jump; only accept big (orientation) changes */
+let VH=innerHeight;
+addEventListener('resize',()=>{if(Math.abs(innerHeight-VH)>150)VH=innerHeight;});
 
 const stage=document.getElementById('stage'), pin=document.getElementById('pin'),
       glow=document.getElementById('glow'), frame=document.getElementById('frame'),
@@ -402,7 +407,7 @@ setTimeout(()=>{if(!siteframe.src)siteframe.src='site/index.html';},1200);
 
 
 function tick(){
-  const total=stage.offsetHeight-innerHeight;
+  const total=stage.offsetHeight-VH;
   target=clamp(-stage.getBoundingClientRect().top/(total||1),0,1);
   pS+=(target-pS)*(reduce?1:0.05);
   pM+=(target-pM)*(reduce?1:0.085);
@@ -441,7 +446,7 @@ function tick(){
     if(el.classList.contains('msys'))base='translateX(-50%) ';
     if(el.classList.contains('mnav'))base='translateX(-50%) ';
     el.style.transform=base+'translateY('+((1-a)*20)+'px) scale('+lerp(0.97,1,a)+')';
-    el.style.filter='blur('+((1-a)*4)+'px)';
+    el.style.filter=coarse?'none':'blur('+((1-a)*4)+'px)';
   }
 
   const typed=sstep(0.76,0.83,pM);
@@ -454,7 +459,7 @@ function tick(){
     const o=clamp(1-Math.abs(t)*1.12,0,1);
     c.style.opacity=o.toFixed(3);
     c.style.transform='translateZ('+(t*zmax)+'px) translateY('+(t*-14)+'px)';
-    c.style.filter='blur('+(Math.abs(t)*4).toFixed(2)+'px)';
+    c.style.filter=coarse?'none':'blur('+(Math.abs(t)*4).toFixed(2)+'px)';
     c.style.visibility=o<=0?'hidden':'visible';
   });
 
@@ -463,12 +468,13 @@ function tick(){
   const bgIn=sstep(0.83,0.92,pM);
   const rIn=sstep(0.86,0.97,pM);
   sitehero.style.transform='scale('+lerp(1.1,1,rIn)+')';
-  sitehero.style.filter=rIn<1?'blur('+((1-rIn)*8)+'px)':'none';
+  sitehero.style.filter=(coarse||rIn>=1)?'none':'blur('+((1-rIn)*8)+'px)';
   sitehero.style.pointerEvents='none';
 
   /* ...then the recreation hands off to the REAL site */
   if(pM>0.3&&!siteframe.src)siteframe.src='site/index.html';
   const swap=sstep(0.955,0.99,target);
+  siteframe.style.display=target>0.9?'block':'none'; /* frozen until you arrive */
   siteframe.style.opacity=swap>0?1:0;
   siteframe.style.pointerEvents=swap>=1?'auto':'none';
   sitehero.style.opacity=(bgIn*(1-swap)).toFixed(3);
@@ -489,8 +495,8 @@ let idleTimer=null, snapAnim=null, lastY=scrollY, lastDir=1, restY=scrollY, touc
 const snapPoints=[0.055,0.21,0.375,0.535,0.69,0.80,1];
 function cancelSnap(){if(snapAnim){cancelAnimationFrame(snapAnim);snapAnim=null;}}
 function doSnap(){
-  if(reduce||touching)return;
-  const total=stage.offsetHeight-innerHeight;
+  if(reduce||coarse||touching)return;
+  const total=stage.offsetHeight-VH;
   const cur=clamp(-stage.getBoundingClientRect().top/(total||1),0,1);
   if(cur<=0.002||cur>=0.998)return;
   let best=null,bd=1e9;
