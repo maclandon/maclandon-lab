@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blog | Systems, Tools & Digital Strategy | Mac Landon</title>
+<meta name="description" content="Practical insights on digital systems, automation, and growth for small service businesses.">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%231C1A16'/%3E%3Ctext x='50%25' y='68%25' text-anchor='middle' font-size='16' font-family='Fraunces, serif' fill='%237fa0c3' font-weight='700'%3EML%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,700;0,9..144,900;1,9..144,400;1,9..144,700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css?v=13.0">
+<style>
+.blog-hero{padding:7rem 4rem 4rem;background:var(--dark);}
+.blog-hero-inner{max-width:860px;margin:0 auto;}
+.blog-hero h1{font-family:"Fraunces",serif;font-size:clamp(2rem,4vw,3.2rem);font-weight:700;color:#fff;line-height:1.1;letter-spacing:-.025em;margin-bottom:1rem;}
+.blog-hero h1 em{font-style:italic;color:#7EACD4;}
+.blog-hero p{font-size:1rem;color:rgba(255,255,255,.45);line-height:1.75;font-weight:300;max-width:520px;}
+.blog-body{padding:4rem;background:var(--bg);}
+.blog-body-inner{max-width:860px;margin:0 auto;}
+.filter-bar{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:2rem;}
+.filter-pill{font-size:.7rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;background:var(--card);color:var(--text-muted);border:1px solid var(--border);padding:.45rem .9rem;border-radius:100px;cursor:pointer;transition:background .2s,color .2s,border-color .2s;font-family:inherit;}
+.filter-pill:hover{color:var(--text);border-color:rgba(43,74,107,.35);}
+.filter-pill.active{background:var(--dark);color:#fff;border-color:var(--dark);}
+.filter-pill .filter-count{margin-left:.45rem;opacity:.55;font-weight:500;}
+.filter-pill.active .filter-count{opacity:.75;}
+.posts-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:2rem;}
+.post-card.hidden{display:none!important;}
+.post-card.featured{grid-column:1/-1;display:grid;grid-template-columns:1.4fr 1fr;}
+.post-card.featured .post-card-img{height:auto;min-height:320px;}
+.post-card.featured .post-card-body{padding:2.5rem;}
+.post-card.featured .post-title{font-size:1.6rem;line-height:1.2;}
+.post-card.featured .post-excerpt{font-size:.95rem;}
+.post-card.featured::before{content:"Featured";position:absolute;top:1rem;right:1rem;font-size:.65rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;background:var(--accent);color:#fff;padding:.25rem .7rem;border-radius:100px;z-index:1;}
+.post-card.featured{position:relative;}
+.posts-grid.is-filtered .post-card.featured{grid-column:auto;display:flex;flex-direction:column;}
+.posts-grid.is-filtered .post-card.featured .post-card-img{height:200px;min-height:0;}
+.posts-grid.is-filtered .post-card.featured .post-card-body{padding:1.75rem;}
+.posts-grid.is-filtered .post-card.featured .post-title{font-size:1.2rem;line-height:1.3;}
+.posts-grid.is-filtered .post-card.featured .post-excerpt{font-size:.86rem;}
+.posts-grid.is-filtered .post-card.featured::before{display:none;}
+.post-card{background:var(--card);border:1px solid var(--border);border-radius:18px;overflow:hidden;text-decoration:none;color:var(--text);transition:transform .25s,box-shadow .25s,border-color .25s;display:flex;flex-direction:column;}
+.post-card:hover{transform:translateY(-3px);box-shadow:0 12px 36px rgba(28,26,22,.08);border-color:rgba(43,74,107,.25);}
+.post-card-img{height:200px;background:var(--dark);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;}
+.post-card-img-bg{position:absolute;inset:0;background:radial-gradient(ellipse at 30% 50%, rgba(127,160,195,0.2) 0%, transparent 70%);}
+.post-card-num{font-family:"Fraunces",serif;font-size:5rem;font-weight:900;color:rgba(255,255,255,.06);position:absolute;bottom:-10px;right:20px;line-height:1;}
+.post-card-tag{position:absolute;top:1rem;left:1rem;font-size:.65rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;background:rgba(28,26,22,.92);color:#fff;border:none;padding:.25rem .7rem;border-radius:100px;}
+.post-card-body{padding:1.75rem;flex:1;display:flex;flex-direction:column;}
+.post-meta{font-size:.72rem;color:var(--text-muted);margin-bottom:.75rem;}
+.post-title{font-family:"Fraunces",serif;font-size:1.2rem;font-weight:700;color:var(--text);line-height:1.3;margin-bottom:.75rem;letter-spacing:-.01em;}
+.post-excerpt{font-size:.86rem;color:var(--text-muted);line-height:1.7;font-weight:300;flex:1;}
+.post-read-more{margin-top:1.25rem;font-size:.8rem;font-weight:500;color:var(--accent);display:flex;align-items:center;gap:.3rem;}
+.post-read-more::after{content:"→";transition:transform .2s;}
+.post-card:hover .post-read-more::after{transform:translateX(3px);}
+.coming-soon{margin-top:3rem;padding:2.5rem;background:var(--card);border:1px solid var(--border);border-radius:18px;text-align:center;}
+.coming-soon p{font-size:.9rem;color:var(--text-muted);line-height:1.7;margin-bottom:1.25rem;}
+@media(max-width:900px){
+  .blog-hero,.blog-body{padding:5rem 1.5rem 3rem;}
+  .posts-grid{grid-template-columns:1fr;}
+  .post-card.featured{grid-template-columns:1fr;}
+  .post-card.featured .post-card-img{height:200px;min-height:0;}
+  .post-card.featured .post-card-body{padding:1.75rem;}
+  .post-card.featured .post-title{font-size:1.2rem;}
+
+  /* Filter bar: single horizontal scrolling row on mobile */
+  .filter-bar{
+    flex-wrap:nowrap;
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+    margin-left:-1.5rem;
+    margin-right:-1.5rem;
+    padding:.25rem 1.5rem .75rem;
+    margin-bottom:1.25rem;
+    scrollbar-width:none;
+    mask-image:linear-gradient(to right,transparent 0,#000 1.5rem,#000 calc(100% - 2rem),transparent 100%);
+    -webkit-mask-image:linear-gradient(to right,transparent 0,#000 1.5rem,#000 calc(100% - 2rem),transparent 100%);
+  }
+  .filter-bar::-webkit-scrollbar{display:none;}
+  .filter-pill{flex-shrink:0;}
+}
+
+/* ════════════════════════════════════════════════════════════════════════════
+   iOS 27 / LIQUID GLASS OVERLAY — applied 2026-06-26
+   ════════════════════════════════════════════════════════════════════════════ */
+
+/* Wallpaper mesh */
+body{position:relative;background:var(--bg)!important;}
+body::after{content:""!important;position:fixed!important;inset:0!important;z-index:-2!important;background:
+  radial-gradient(ellipse 60% 45% at 15% 14%,rgba(255,178,210,.42),transparent 55%),
+  radial-gradient(ellipse 55% 50% at 85% 20%,rgba(160,196,238,.48),transparent 55%),
+  radial-gradient(ellipse 60% 55% at 50% 78%,rgba(255,215,170,.4),transparent 55%),
+  radial-gradient(ellipse 50% 45% at 90% 80%,rgba(208,180,250,.36),transparent 50%),
+  radial-gradient(ellipse 50% 40% at 10% 80%,rgba(190,230,205,.32),transparent 55%),
+  var(--bg)!important;pointer-events:none!important;}
+
+/* Dark hero → translucent dark glass */
+.blog-hero{
+  background:rgba(28,26,22,.78)!important;
+  backdrop-filter:blur(36px) saturate(185%)!important;
+  -webkit-backdrop-filter:blur(36px) saturate(185%)!important;
+  position:relative!important;
+}
+.blog-hero h1 em{
+  color:#a0c4e8!important;
+  -webkit-text-fill-color:#a0c4e8!important;
+  background:none!important;
+}
+
+/* Light body → transparent so wallpaper bleeds */
+.blog-body{background:transparent!important;}
+
+/* Filter pills → iOS 27 glass chips */
+.filter-pill{
+  background:rgba(255,255,255,.55)!important;
+  backdrop-filter:blur(20px) saturate(180%)!important;
+  -webkit-backdrop-filter:blur(20px) saturate(180%)!important;
+  border:1px solid rgba(255,255,255,.55)!important;
+  color:var(--text-mid)!important;
+  box-shadow:0 1px 0 rgba(255,255,255,.6) inset,0 2px 6px rgba(28,26,22,.04)!important;
+  transition:transform .2s ease,background .2s ease!important;
+}
+.filter-pill:hover{background:rgba(255,255,255,.72)!important;border-color:rgba(127,160,195,.4)!important;}
+.filter-pill.active{
+  background:rgba(28,26,22,.85)!important;
+  color:#fff!important;
+  border-color:rgba(28,26,22,.85)!important;
+  backdrop-filter:blur(20px) saturate(180%)!important;
+}
+
+/* Post cards → translucent glass */
+.post-card{
+  background:rgba(255,255,255,.55)!important;
+  backdrop-filter:blur(28px) saturate(180%)!important;
+  -webkit-backdrop-filter:blur(28px) saturate(180%)!important;
+  border:1px solid rgba(255,255,255,.55)!important;
+  border-radius:22px!important;
+  box-shadow:0 1px 0 rgba(255,255,255,.6) inset,0 8px 32px rgba(28,26,22,.05)!important;
+  transition:transform .25s ease,background .25s ease,border-color .25s ease!important;
+}
+.post-card:hover{
+  background:rgba(255,255,255,.72)!important;
+  transform:translateY(-3px)!important;
+  border-color:rgba(127,160,195,.4)!important;
+  box-shadow:0 1px 0 rgba(255,255,255,.6) inset,0 12px 36px rgba(28,26,22,.08)!important;
+}
+
+/* Post card image area → keep dark for contrast with text */
+.post-card-img{
+  background:rgba(28,26,22,.92)!important;
+  backdrop-filter:blur(20px)!important;
+}
+.post-card-tag{
+  background:rgba(28,26,22,.78)!important;
+  backdrop-filter:blur(12px)!important;
+  -webkit-backdrop-filter:blur(12px)!important;
+}
+
+/* Featured card */
+.post-card.featured::before{
+  background:linear-gradient(135deg,#7fa0c3,#3D6B9A)!important;
+  backdrop-filter:blur(10px)!important;
+}
+
+/* Coming-soon card → glass */
+.coming-soon{
+  background:rgba(255,255,255,.55)!important;
+  backdrop-filter:blur(28px) saturate(180%)!important;
+  -webkit-backdrop-filter:blur(28px) saturate(180%)!important;
+  border:1px solid rgba(255,255,255,.55)!important;
+  border-radius:22px!important;
+  box-shadow:0 1px 0 rgba(255,255,255,.6) inset,0 8px 32px rgba(28,26,22,.05)!important;
+}
+
+/* Pills everywhere (extra safety) */
+.btn-dark,.btn-cta,.btn-primary,button[type="submit"]{border-radius:100px!important;}
+</style>
+<link rel="canonical" href="https://maclandon.com/blog.html">
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#1C1A16">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Mac Landon">
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo"><img src="logo.png" alt="Mac Landon"></a>
+  <ul class="nav-links">
+    <li><a href="/#services">Services</a></li>
+    <li><a href="/#pricing">Pricing</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="/blog.html">Blog</a></li>
+    <li><a href="/audit.html">Audit</a></li>
+  </ul>
+  <a href="/blog.html" class="nav-mobile-blog" style="font-size:.72rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.65);text-decoration:none;display:none;">Blog</a>
+  <div class="nav-right">
+    <span class="nav-li"><a href="https://www.linkedin.com/in/maclandon/" target="_blank" rel="noopener" aria-label="LinkedIn">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+    </a></span>
+    <span class="nav-li"><a href="https://www.instagram.com/bymaclandon" target="_blank" rel="noopener" aria-label="Instagram">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+    </a></span>
+    <a href="https://calendly.com/maclandon/30min" target="_blank" class="nav-cta">Book a Call</a>
+  </div>
+  <button class="menu-text-btn" id="hamburger" aria-label="Menu">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+  </button>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <div class="mobile-menu-card">
+    <a href="/#services">Services</a>
+    <a href="/#pricing">Pricing</a>
+    <a href="about.html">About</a>
+    <a href="/blog.html">Blog</a>
+    <a href="/audit.html">Audit</a>
+    <a href="https://calendly.com/maclandon/30min" target="_blank">Book a Call</a>
+  </div>
+</div>
+
+<div class="blog-hero">
+  <div class="blog-hero-inner">
+    <div class="sec-tag">Insights</div>
+    <h1>Practical thinking on <em>building better businesses.</em></h1>
+    <p>No fluff. Just what's actually working: systems, tools, and lessons from working with small businesses every day.</p>
+  </div>
+</div>
+
+<div class="blog-body">
+  <div class="blog-body-inner">
+    <div class="filter-bar" id="filter-bar"></div>
+    <div class="posts-grid">
+
+      <a href="/blog-intake-form.html" class="post-card featured">
+        <div class="post-card-img">
+          <img src="mgtax-intake-final.jpg" alt="Client intake form" style="width:100%;height:100%;object-fit:cover;">
+          <span class="post-card-tag">Client Experience</span>
+        </div>
+        <div class="post-card-body">
+          <div class="post-meta">July 2026 · 5 min read</div>
+          <div class="post-title">The Intake Form Fix That Took Completion From 40% to 85%</div>
+          <div class="post-excerpt">A long intake form quietly kills sign-ups from clients you've already won. The fix took one afternoon: split the commitment from the paperwork. Here's exactly how it works.</div>
+          <div class="post-read-more">Read article</div>
+        </div>
+      </a>
+
+      <a href="/blog-funnel-leaks.html" class="post-card">
+        <div class="post-card-img">
+          <img src="little-book-co-product-hero.webp" alt="Little Book Co. product" style="width:100%;height:100%;object-fit:cover;">
+          <span class="post-card-tag">Sales Funnels</span>
+        </div>
+        <div class="post-card-body">
+          <div class="post-meta">June 2026 · 5 min read</div>
+          <div class="post-title">The Funnel Leaks I Find in Almost Every Small Business</div>
+          <div class="post-excerpt">Before you spend a dollar on more traffic, check these four leaks. Broken bio links, ungated freebies, rented audiences, and post-sale silence drain more revenue than weak marketing ever will.</div>
+          <div class="post-read-more">Read article</div>
+        </div>
+      </a>
+
+      <a href="/blog-onboarding.html" class="post-card">
+        <div class="post-card-img">
+          <img src="blogonboarding.jpg" alt="Client onboarding" style="width:100%;height:100%;object-fit:cover;">
+          <span class="post-card-tag">Client Experience</span>
+        </div>
+        <div class="post-card-body">
+          <div class="post-meta">May 2026 · 5 min read</div>
+          <div class="post-title">Why Your Onboarding Process Is Costing You Repeat Business</div>
+          <div class="post-excerpt">Most service businesses lose repeat clients not because of bad work, but because the experience around the work is forgettable. Here's what to fix.</div>
+          <div class="post-read-more">Read article</div>
+        </div>
+      </a>
+
+      <a href="/blog-client-portal.html" class="post-card">
+        <div class="post-card-img">
+          <img src="blogclientportal.jpg" alt="Client portal" style="width:100%;height:100%;object-fit:cover;">
+          <span class="post-card-tag">Tools & Systems</span>
+        </div>
+        <div class="post-card-body">
+          <div class="post-meta">May 2026 · 5 min read</div>
+          <div class="post-title">What a Client Portal Actually Does for a Solo Service Business</div>
+          <div class="post-excerpt">A client portal isn't a fancy tech upgrade. It removes you from the middle of every small interaction and makes your business run cleaner without you having to be available all the time.</div>
+          <div class="post-read-more">Read article</div>
+        </div>
+      </a>
+
+      <a href="/blog-raise-prices.html" class="post-card">
+        <div class="post-card-img">
+          <img src="blograiseprice.jpg" alt="Raise prices" style="width:100%;height:100%;object-fit:cover;">
+          <span class="post-card-tag">Business Operations</span>
+        </div>
+        <div class="post-card-body">
+          <div class="post-meta">May 2026 · 5 min read</div>
+          <div class="post-title">How to Raise Your Prices Without Losing Clients</div>
+          <div class="post-excerpt">Raising your prices isn't a negotiation with your clients. It's a decision you make about the kind of business you're building. Here's how to do it without the anxiety.</div>
+          <div class="post-read-more">Read article</div>
+        </div>
+      </a>
+
+      <a href="/blog-referral-wall.html" class="post-card">
+        <div class="post-card-img">
+          <img src="blogreferralwall.jpg" alt="Referral business ceiling" style="width:100%;height:100%;object-fit:cover;">
+          <span class="post-card-tag">Business Operations</span>
+        </div>
+        <div class="post-card-body">
+          <div class="post-meta">May 2026 · 5 min read</div>
+          <div class="post-title">Why Your Referral-Only Business Will Hit a Wall</div>
+          <div class="post-excerpt">Referrals are a great way to start a business. They're a dangerous way to run one. Here's what happens when the tap slows down, and what to build before it does.</div>
+          <div class="post-read-more">Read article</div>
+        </div>
+      </a>
+
+      <a href="/blog-website-conversion.html" class="post-card">
+        <div class="post-card-img">
+          <img src="blog-website-conversion.webp" alt="Website conversion" style="width:100%;height:100%;object-fit:cover;">
+          <span class="post-card-tag">Websites</span>
+        </div>
+        <div class="post-card-body">
+          <div class="post-meta">April 2026 · 6 min read</div>
+          <div class="post-title">Why Most Small Business Websites Don't Convert (And How to Fix Yours)</div>
+          <div class="post-excerpt">Most small business websites look fine but do absolutely nothing. Here's why they fail to turn visitors into clients, and the exact fixes that actually work.</div>
+          <div class="post-read-more">Read article</div>
+        </div>
+      </a>
+
+      <a href="/blog-free-stack.html" class="post-card">
+        <div class="post-card-img">
+          <img src="blog-free-stack.webp" alt="Free tech stack" style="width:100%;height:100%;object-fit:cover;">
+          <span class="post-card-tag">Tools & Systems</span>
+        </div>
+        <div class="post-card-body">
+          <div class="post-meta">April 2026 · 5 min read</div>
+          <div class="post-title">The $0 Tech Stack That Can Run a Small Service Business</div>
+          <div class="post-excerpt">You don't need to spend money on software to run a professional small business. Here's the complete free tech stack: scheduling, payments, intake, and more.</div>
+          <div class="post-read-more">Read article</div>
+        </div>
+      </a>
+
+      <a href="/blog-hire-vs-automate.html" class="post-card">
+        <div class="post-card-img">
+          <img src="blog-hire-vs-automate.webp" alt="Hire vs automate" style="width:100%;height:100%;object-fit:cover;">
+          <span class="post-card-tag">Business Operations</span>
+        </div>
+        <div class="post-card-body">
+          <div class="post-meta">April 2026 · 6 min read</div>
+          <div class="post-title">How to Know If You're Ready to Hire vs. Ready to Automate</div>
+          <div class="post-excerpt">Feeling overwhelmed and thinking about hiring? Before you do, read this. The answer might be automation, and it's faster and cheaper than you think.</div>
+          <div class="post-read-more">Read article</div>
+        </div>
+      </a>
+
+      <a href="/blog-admin-cost.html" class="post-card">
+        <div class="post-card-img">
+          <img src="blog-admin-cost.webp" alt="Admin cost" style="width:100%;height:100%;object-fit:cover;">
+          <span class="post-card-tag">Business Operations</span>
+        </div>
+        <div class="post-card-body">
+          <div class="post-meta">April 2026 · 6 min read</div>
+          <div class="post-title">How Much Is Admin Work Actually Costing You? (The Real Math)</div>
+          <div class="post-excerpt">Most small business owners vastly underestimate what manual admin tasks actually cost them. Here's how to calculate the real number, and what to do about it.</div>
+          <div class="post-read-more">Read article</div>
+        </div>
+      </a>
+
+      <a href="/blog-booking.html" class="post-card">
+        <div class="post-card-img">
+          <img src="blog-booking.webp" alt="Booking system" style="width:100%;height:100%;object-fit:cover;">
+          <span class="post-card-tag">Tools & Systems</span>
+        </div>
+        <div class="post-card-body">
+          <div class="post-meta">April 2026 · 7 min read</div>
+          <div class="post-title">The Best Booking System for Small Service Businesses in 2026</div>
+          <div class="post-excerpt">Calendly vs Acuity vs Dubsado: an honest comparison of the top booking tools from someone who sets them up for a living. Which one is actually right for your business?</div>
+          <div class="post-read-more">Read article</div>
+        </div>
+      </a>
+
+      <a href="/blog-mgtax.html" class="post-card">
+        <div class="post-card-img">
+          <img src="blog-mgtax.webp" alt="MG Tax case study" style="width:100%;height:100%;object-fit:cover;">
+          <span class="post-card-tag">Case Study</span>
+        </div>
+        <div class="post-card-body">
+          <div class="post-meta">April 2026 · 8 min read</div>
+          <div class="post-title">What I Learned Digitizing a 30-Year-Old Tax Practice in 30 Days</div>
+          <div class="post-excerpt">The full story of how MG Tax Inc. went from entirely paper-based to 100% digital in under a month: what worked, what didn't, and what I'd do differently.</div>
+          <div class="post-read-more">Read article</div>
+        </div>
+      </a>
+
+      <a href="/blog-systems.html" class="post-card">
+        <div class="post-card-img">
+          <img src="blog-systems.webp" alt="Bad systems" style="width:100%;height:100%;object-fit:cover;">
+          <span class="post-card-tag">Systems</span>
+        </div>
+        <div class="post-card-body">
+          <div class="post-meta">April 2026 · 5 min read</div>
+          <div class="post-title">5 Signs Your Small Business Is Losing Money to Bad Systems</div>
+          <div class="post-excerpt">Most small business owners don't realize how much revenue slips through the cracks every month. Not because of bad products or poor sales, but because the infrastructure holding everything together is quietly failing.</div>
+          <div class="post-read-more">Read article</div>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2026 Mac Landon. All rights reserved.</div>
+    <div class="footer-loc">New York City · Remote Nationwide</div>
+  </div>
+</footer>
+
+<script>
+const hamburger=document.getElementById('hamburger');
+const mobileMenu=document.getElementById('mobileMenu');
+const hamburgerIcon=`<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>`;
+const closeIcon=`<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>`;
+hamburger.addEventListener('click',()=>{
+  const isOpen=mobileMenu.classList.toggle('open');
+  hamburger.innerHTML=isOpen?closeIcon:hamburgerIcon;
+});
+mobileMenu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{
+  mobileMenu.classList.remove('open');
+  hamburger.innerHTML=hamburgerIcon;
+}));
+mobileMenu.addEventListener('click',e=>{
+  if(e.target===mobileMenu){mobileMenu.classList.remove('open');hamburger.innerHTML=hamburgerIcon;}
+});
+
+// Blog category filter (URL-synced)
+(function(){
+  const cards = Array.from(document.querySelectorAll('.posts-grid .post-card'));
+  const bar = document.getElementById('filter-bar');
+  if(!bar||!cards.length) return;
+  const slug = s => s.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+  const counts = {};
+  cards.forEach(c => {
+    const t = c.querySelector('.post-card-tag');
+    const tag = t ? t.textContent.trim() : '';
+    if(tag) counts[tag] = (counts[tag]||0) + 1;
+  });
+  const cats = Object.keys(counts).sort();
+  const slugMap = {};
+  cats.forEach(c => { slugMap[slug(c)] = c; });
+  const makePill = (label, value, count) => {
+    const b = document.createElement('button');
+    b.className = 'filter-pill';
+    b.dataset.filter = value;
+    b.innerHTML = label + ' <span class="filter-count">' + count + '</span>';
+    return b;
+  };
+  bar.appendChild(makePill('All','__all',cards.length));
+  cats.forEach(c => bar.appendChild(makePill(c,c,counts[c])));
+  const grid = document.querySelector('.posts-grid');
+  function apply(cat){
+    bar.querySelectorAll('.filter-pill').forEach(p=>{
+      p.classList.toggle('active', p.dataset.filter === (cat || '__all'));
+    });
+    if (grid) grid.classList.toggle('is-filtered', !!cat);
+    cards.forEach(c => {
+      const t = c.querySelector('.post-card-tag');
+      const tag = t ? t.textContent.trim() : '';
+      c.classList.toggle('hidden', !!cat && tag !== cat);
+    });
+  }
+  function fromUrl(){
+    const s = new URLSearchParams(location.search).get('cat');
+    return s && slugMap[s] ? slugMap[s] : null;
+  }
+  bar.addEventListener('click', e => {
+    const pill = e.target.closest('.filter-pill');
+    if(!pill) return;
+    const f = pill.dataset.filter;
+    const cat = f === '__all' ? null : f;
+    const target = cat ? location.pathname + '?cat=' + slug(cat) : location.pathname;
+    if(location.pathname + location.search !== target){
+      history.pushState(null, '', target);
+    }
+    apply(cat);
+  });
+  window.addEventListener('popstate', () => apply(fromUrl()));
+  apply(fromUrl());
+})();
+</script>
+</body>
+</html>

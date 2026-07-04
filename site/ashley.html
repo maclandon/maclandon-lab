@@ -1,0 +1,993 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Case Study: Etsy Brand & Shop Build | Mac Landon</title>
+<meta name="description" content="How Mac Landon took Ashley DeMaria from zero to a profitable Etsy shop: brand, storefront, SEO, and pricing systems built from scratch, profitable in the first month with a 52% margin.">
+<meta property="og:title" content="Case Study: Etsy Brand & Shop Build | Mac Landon" />
+<meta property="og:description" content="From zero to a profitable Etsy shop in 8 months — brand identity, SEO, pricing, and social strategy built from scratch." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://maclandon.com/ashley.html" />
+<meta property="og:image" content="https://maclandon.com/ashleyetsystorefront.jpg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:card" content="summary_large_image" />
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%231C1A16'/%3E%3Ctext x='50%25' y='68%25' text-anchor='middle' font-size='16' font-family='Fraunces, serif' fill='%237fa0c3' font-weight='700'%3EML%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,700;1,9..144,300;1,9..144,700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css?v=17.2">
+<style>
+html{scroll-behavior:smooth;}
+.logo-path{stroke:#E8E4DC;}
+.nav-logo{display:flex;align-items:center;}
+.sec-tag.light{color:#7EACD4;}
+.sec-tag.light::before{background:#7EACD4;}
+.inner{max-width:1100px;margin:0 auto;}
+
+/* HERO */
+.cs-hero{padding:7rem 4rem 5rem;background:var(--dark);position:relative;overflow:hidden;}
+.cs-hero::before{content:"";position:absolute;top:-20%;left:50%;transform:translateX(-50%);width:800px;height:500px;background:radial-gradient(ellipse,rgba(43,74,107,.2) 0%,transparent 70%);pointer-events:none;}
+.cs-hero-inner{max-width:1100px;margin:0 auto;position:relative;z-index:1;}
+.cs-back{display:inline-flex;align-items:center;gap:.4rem;font-size:.78rem;color:rgba(255,255,255,.65);text-decoration:none;letter-spacing:.06em;margin-bottom:2rem;transition:color .2s;}
+.cs-back:hover{color:rgba(255,255,255,.7);}
+.cs-back::before{content:"←";}
+.cs-hero-eyebrow{font-size:.75rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:#7EACD4;margin-bottom:1rem;display:flex;align-items:center;gap:.5rem;}
+.cs-hero-eyebrow::before{content:"";width:14px;height:1.5px;background:#7EACD4;}
+.cs-hero h1{font-family:"Fraunces",serif;font-size:clamp(2.2rem,4vw,3.8rem);font-weight:700;color:#fff;line-height:1.05;letter-spacing:-.025em;margin-bottom:1.25rem;}
+.cs-hero h1 em{font-style:italic;background:linear-gradient(90deg,#7fa0c3,#3D6B9A,#7fa0c3,#a0c4e8);background-size:300%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:gradtext 4s ease-in-out infinite;}
+.cs-hero-sub{font-size:1.05rem;color:rgba(255,255,255,.65);max-width:560px;line-height:1.75;font-weight:400;margin-bottom:2.5rem;}
+.cs-meta{display:flex;flex-wrap:wrap;gap:2rem;margin-top:2.5rem;padding-top:2.5rem;border-top:1px solid rgba(255,255,255,.08);}
+.cs-meta-item{}
+.cs-meta-label{font-size:.75rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.65);margin-bottom:.3rem;}
+.cs-meta-value{font-size:.9rem;color:rgba(255,255,255,.7);font-weight:400;}
+
+/* STAT BAR */
+.cs-stats{background:var(--dark2);border-top:1px solid rgba(255,255,255,.06);padding:2.5rem 4rem;}
+.cs-stats-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:1px;}
+.cs-stat{text-align:center;padding:1.25rem 1rem;border-right:1px solid rgba(255,255,255,.06);}
+.cs-stat:last-child{border-right:none;}
+.cs-stat-n{font-family:"Fraunces",serif;font-size:2.4rem;font-weight:900;color:#fff;line-height:1;margin-bottom:.3rem;}
+.cs-stat-n em{font-style:normal;color:#7EACD4;}
+.cs-stat-l{font-size:.72rem;color:rgba(255,255,255,.65);line-height:1.5;}
+
+/* SECTION BASE */
+.cs-sec{padding:5.5rem 4rem;}
+.cs-sec-dark{background:var(--dark);}
+.cs-sec-white{background:var(--white);}
+.cs-sec-bg{background:var(--bg);}
+.cs-sec-bg2{background:var(--bg2);}
+.cs-sec h2{font-family:"Fraunces",serif;font-size:clamp(1.8rem,2.8vw,2.6rem);font-weight:700;line-height:1.1;letter-spacing:-.025em;color:var(--text);margin-bottom:1.5rem;}
+.cs-sec h2 em{font-style:italic;background:linear-gradient(90deg,#7fa0c3,#3D6B9A,#7fa0c3,#a0c4e8);background-size:300%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:gradtext 4s ease-in-out infinite;}
+.cs-sec-dark h2{color:#fff;}
+.cs-body{font-size:.97rem;line-height:1.9;color:var(--text-mid);font-weight:300;margin-bottom:1rem;}
+.cs-body strong{color:var(--text);font-weight:500;}
+.cs-body-light{font-size:.97rem;line-height:1.9;color:rgba(255,255,255,.65);font-weight:400;margin-bottom:1rem;}
+.cs-body-light strong{color:#fff;font-weight:500;}
+
+/* THE PROBLEM */
+.problem-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;}
+.problem-image-wrap{border-radius:20px;overflow:hidden;background:var(--card);border:1px solid var(--border);aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;}
+.problem-image-wrap img{width:100%;height:100%;object-fit:cover;display:block;}
+.placeholder-img{width:100%;height:100%;min-height:280px;background:var(--bg2);border-radius:20px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:.75rem;border:2px dashed var(--border);}
+.placeholder-img span{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted);}
+.placeholder-img svg{color:var(--border);}
+.pain-list{list-style:none;display:flex;flex-direction:column;gap:.75rem;margin-top:1.5rem;}
+.pain-list li{display:flex;align-items:flex-start;gap:.85rem;font-size:.92rem;color:var(--text-mid);line-height:1.6;font-weight:300;padding:.85rem 1rem;background:var(--card);border-radius:10px;border:1px solid var(--border);}
+.pain-list li::before{content:"✗";color:#c97a7a;font-weight:700;flex-shrink:0;margin-top:.05rem;}
+
+/* USER JOURNEY */
+.journey-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;margin-top:2.5rem;}
+.journey-step{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:2rem;position:relative;transition:background .2s;}
+.journey-step:hover{background:rgba(255,255,255,.07);}
+.journey-step-n{font-family:"Fraunces",serif;font-size:3rem;font-weight:900;font-style:italic;color:rgba(255,255,255,.08);line-height:1;margin-bottom:.85rem;}
+.journey-step-title{font-size:.88rem;font-weight:500;color:#fff;margin-bottom:.5rem;letter-spacing:.02em;}
+.journey-step-desc{font-size:.84rem;color:rgba(255,255,255,.65);line-height:1.75;font-weight:400;}
+.journey-step-old{margin-top:1rem;padding:.75rem 1rem;background:rgba(201,122,122,.08);border:1px solid rgba(201,122,122,.15);border-radius:8px;font-size:.8rem;color:rgba(201,122,122,.8);line-height:1.6;}
+.journey-step-new{margin-top:.5rem;padding:.75rem 1rem;background:rgba(127,160,195,.08);border:1px solid rgba(127,160,195,.2);border-radius:8px;font-size:.8rem;color:#7EACD4;line-height:1.6;}
+.journey-connector{display:flex;align-items:center;justify-content:center;padding-top:3rem;color:rgba(255,255,255,.15);}
+
+/* WIREFRAMES */
+.wireframe-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-top:2.5rem;}
+.wireframe-card{background:var(--card);border-radius:16px;border:1px solid var(--border);overflow:hidden;}
+.wireframe-label{padding:.75rem 1.25rem;background:var(--bg2);border-bottom:1px solid var(--border);font-size:.75rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted);}
+.wireframe-placeholder{min-height:240px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:.75rem;padding:2rem;}
+.wireframe-placeholder span{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted);}
+.iteration-note{margin-top:1.5rem;padding:1.75rem 2rem;background:rgba(127,160,195,.08);border-radius:12px;border-left:4px solid var(--accent);}
+.iteration-note p{font-size:1rem;color:var(--text-mid);line-height:1.8;font-weight:300;}
+.iteration-note strong{color:var(--accent);font-weight:600;font-size:1rem;}
+
+/* FINAL UI */
+.final-ui-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;margin-bottom:4rem;}
+.final-ui-grid.reverse{direction:rtl;}
+.final-ui-grid.reverse > *{direction:ltr;}
+.final-ui-image{border-radius:20px;overflow:hidden;border:1px solid var(--border);}
+.final-ui-image img{width:100%;display:block;}
+.solution-tag{display:inline-flex;align-items:center;gap:.4rem;font-size:.75rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;background:rgba(127,160,195,.12);color:var(--accent);border:1px solid rgba(127,160,195,.2);padding:.2rem .75rem;border-radius:100px;margin-bottom:.85rem;}
+.solution-list{list-style:none;display:flex;flex-direction:column;gap:.5rem;margin-top:1rem;}
+.solution-list li{display:flex;align-items:flex-start;gap:.65rem;font-size:.88rem;color:var(--text-mid);line-height:1.6;font-weight:300;}
+.solution-list li::before{content:"✓";color:var(--accent);font-weight:700;flex-shrink:0;margin-top:.1rem;}
+
+/* RESULTS */
+.results-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;margin-top:2.5rem;}
+.result-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:1.75rem 1.5rem;text-align:center;transition:background .25s,transform .25s;}
+.result-card:hover{background:rgba(255,255,255,.09);transform:translateY(-3px);}
+.result-n{font-family:"Fraunces",serif;font-size:2.8rem;font-weight:900;color:#fff;line-height:1;margin-bottom:.35rem;}
+.result-n em{font-style:normal;color:#7EACD4;}
+.result-l{font-size:.78rem;color:rgba(255,255,255,.65);line-height:1.5;}
+.testimonial-block{margin-top:3rem;padding:2.5rem;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:20px;max-width:720px;}
+.testi-q{font-size:1.05rem;color:rgba(255,255,255,.7);line-height:1.85;font-weight:300;font-style:italic;margin-bottom:1.25rem;}
+.testi-q em{font-style:normal;color:#fff;font-weight:400;}
+.testi-person{display:flex;align-items:center;gap:.85rem;}
+.testi-avatar{width:44px;height:44px;border-radius:50%;object-fit:cover;border:2px solid rgba(255,255,255,.15);}
+.testi-name{font-size:.88rem;font-weight:500;color:#fff;}
+.testi-role{font-size:.75rem;color:rgba(255,255,255,.65);}
+
+/* CTA */
+.cs-cta{padding:6rem 4rem;background:var(--dark);text-align:center;position:relative;overflow:hidden;}
+.cs-cta::before{content:"";position:absolute;top:-20%;left:50%;transform:translateX(-50%);width:600px;height:400px;background:radial-gradient(ellipse,rgba(43,74,107,.25) 0%,transparent 70%);pointer-events:none;}
+.cs-cta-eyebrow{font-size:.75rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.65);margin-bottom:.85rem;}
+.cs-cta h2{font-family:"Fraunces",serif;font-size:clamp(2rem,4vw,3.5rem);font-weight:700;font-style:italic;color:#fff;line-height:1.05;max-width:600px;margin:0 auto 1rem;letter-spacing:-.02em;position:relative;z-index:1;}
+.cs-cta p{font-size:.97rem;color:rgba(255,255,255,.65);max-width:380px;margin:0 auto 2.25rem;line-height:1.75;font-weight:400;position:relative;z-index:1;}
+.cs-cta-btns{display:flex;align-items:center;justify-content:center;gap:1.25rem;flex-wrap:wrap;position:relative;z-index:1;}
+.btn-cta{display:inline-flex;align-items:center;gap:.4rem;background:var(--white);color:var(--dark);font-size:.9rem;font-weight:500;padding:.85rem 1.8rem;border-radius:6px;text-decoration:none;transition:background .2s,gap .2s;}
+.btn-cta:hover{background:var(--card);gap:.65rem;}
+.btn-ghost{font-size:.9rem;color:rgba(255,255,255,.65);text-decoration:none;border-bottom:1px solid rgba(255,255,255,.15);padding-bottom:2px;transition:color .2s;}
+.btn-ghost:hover{color:rgba(255,255,255,.75);}
+
+/* NEXT CASE STUDY */
+.next-case{display:flex;align-items:center;gap:2.5rem;max-width:900px;margin:0 auto;padding:4rem;background:var(--card);border-top:1px solid var(--border);text-decoration:none;transition:background .2s;}
+.next-case:hover{background:var(--bg2);}
+.next-case-label{font-size:.72rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--text-muted);margin-bottom:.35rem;}
+.next-case-title{font-family:"Fraunces",serif;font-size:clamp(1.2rem,2vw,1.6rem);font-weight:700;color:var(--text);line-height:1.2;}
+.next-case-title em{font-style:italic;color:var(--accent);}
+.next-case-img{width:140px;min-width:140px;height:95px;border-radius:10px;overflow:hidden;flex-shrink:0;}
+.next-case-img img{width:100%;height:100%;object-fit:cover;}
+.next-case-arrow{margin-left:auto;color:var(--text-muted);transition:transform .2s,color .2s;flex-shrink:0;}
+.next-case:hover .next-case-arrow{transform:translateX(4px);color:var(--accent);}
+
+/* MOBILE */
+@media(max-width:900px){
+  .cs-hero{padding:5rem 1.5rem 3rem;}
+  .cs-stats{padding:2rem 1.5rem;}
+  .cs-stats-inner{grid-template-columns:repeat(2,1fr);}
+  .cs-stat{border-right:none;border-bottom:1px solid rgba(255,255,255,.06);padding:.85rem .5rem;}
+  .cs-stat:nth-child(odd){border-right:1px solid rgba(255,255,255,.06);}
+  .cs-stat:nth-last-child(-n+2){border-bottom:none;}
+  .cs-stat-n{font-size:1.8rem;}
+  .cs-sec{padding:3rem 1.5rem;}
+  .cs-sec h2{font-size:1.6rem;}
+  .problem-grid,.final-ui-grid,.wireframe-grid,.journey-steps,.results-grid{grid-template-columns:1fr;}
+  .final-ui-grid{display:flex;flex-direction:column;}
+  .final-ui-grid.reverse{direction:ltr;}
+  .final-ui-grid > :last-child{order:-1;}
+  .journey-connector{display:none;}
+  .cs-meta{gap:1.25rem;}
+  .cs-cta{padding:4rem 1.5rem;}
+  .results-grid{grid-template-columns:1fr 1fr;}
+  .next-case{flex-direction:column;text-align:center;padding:2.5rem 1.5rem;gap:1.25rem;}
+  .next-case-img{width:100%;max-width:280px;height:auto;aspect-ratio:16/10;}
+  .next-case-arrow{display:none;}
+}
+.logo-path{stroke:#E8E4DC;stroke-width:2;fill:none;stroke-dasharray:3000;stroke-dashoffset:3000;animation:draw 6s ease forwards;}
+@keyframes draw{to{stroke-dashoffset:0;}}
+
+/* ═══ iOS 27 / GOLDEN GATE OVERLAY (case study pages) ═══ */
+
+/* WALLPAPER MESH */
+body{position:relative;background:var(--bg)!important;}
+body::after{content:""!important;position:fixed!important;inset:0!important;z-index:-2!important;background:
+  radial-gradient(ellipse 60% 45% at 15% 14%,rgba(255,178,210,.42),transparent 55%),
+  radial-gradient(ellipse 55% 50% at 85% 20%,rgba(160,196,238,.48),transparent 55%),
+  radial-gradient(ellipse 60% 55% at 50% 78%,rgba(255,215,170,.4),transparent 55%),
+  radial-gradient(ellipse 50% 45% at 90% 80%,rgba(208,180,250,.36),transparent 50%),
+  radial-gradient(ellipse 50% 40% at 10% 80%,rgba(190,230,205,.32),transparent 55%),
+  var(--bg)!important;pointer-events:none!important;}
+
+/* LIGHT SECTIONS → transparent (wallpaper bleeds through) */
+.cs-sec-white,.cs-sec-bg,.cs-sec-bg2{background:transparent!important;position:relative;}
+
+/* DARK SECTIONS → translucent dark glass */
+.cs-hero,.cs-sec-dark,.cs-cta{
+  background:rgba(28,26,22,.78)!important;
+  backdrop-filter:blur(36px) saturate(185%)!important;
+  -webkit-backdrop-filter:blur(36px) saturate(185%)!important;
+  position:relative!important;
+}
+/* STAT BAR → iOS 27 light glass card (matches index/about) */
+.cs-stats{
+  background:transparent!important;
+  border-top:0!important;
+  padding:1rem 1.5rem 2rem!important;
+  position:relative!important;
+}
+.cs-stats-inner{
+  background:rgba(255,255,250,.55)!important;
+  backdrop-filter:blur(28px) saturate(180%)!important;
+  -webkit-backdrop-filter:blur(28px) saturate(180%)!important;
+  border:1px solid rgba(255,255,255,.55)!important;
+  border-radius:24px!important;
+  box-shadow:0 1px 0 rgba(255,255,255,.7) inset,0 8px 28px rgba(28,26,22,.06)!important;
+  padding:1.5rem 1rem!important;
+  position:relative!important;overflow:hidden!important;
+}
+.cs-stats-inner::before{
+  content:""!important;position:absolute!important;top:0!important;left:0!important;right:0!important;height:50%!important;
+  background:linear-gradient(180deg,rgba(255,255,255,.7) 0%,rgba(255,255,255,0) 100%)!important;
+  pointer-events:none!important;z-index:1!important;border-radius:24px 24px 0 0!important;
+}
+.cs-stats-inner > *{position:relative!important;z-index:2!important;}
+.cs-stat{
+  border-right:1px solid rgba(28,26,22,.08)!important;
+  padding:.25rem 1rem!important;
+}
+.cs-stat:last-child{border-right:none!important;}
+.cs-stat-n{
+  color:var(--accent2)!important;
+  font-family:"Fraunces",serif!important;
+  font-weight:700!important;
+  text-shadow:none!important;
+  letter-spacing:-.015em!important;
+}
+.cs-stat-n em{
+  color:var(--accent2)!important;
+  -webkit-text-fill-color:var(--accent2)!important;
+  background:none!important;
+  font-style:normal!important;
+}
+.cs-stat-l{
+  color:var(--text-mid)!important;
+  font-weight:500!important;
+  text-shadow:none!important;
+}
+@media(max-width:760px){
+  .cs-stats{padding:.75rem 1rem 1.5rem!important;}
+  .cs-stat{border-right:none!important;border-bottom:1px solid rgba(28,26,22,.08)!important;}
+  .cs-stat:nth-child(odd){border-right:1px solid rgba(28,26,22,.08)!important;}
+  .cs-stat:nth-last-child(-n+2){border-bottom:none!important;}
+}
+
+/* PAIN LIST ITEMS → glass cards on light bg */
+.pain-list li{
+  background:rgba(255,255,255,.55)!important;
+  backdrop-filter:blur(20px) saturate(180%)!important;
+  -webkit-backdrop-filter:blur(20px) saturate(180%)!important;
+  border:1px solid rgba(255,255,255,.55)!important;
+  border-radius:14px!important;
+  box-shadow:0 1px 0 rgba(255,255,255,.6) inset,0 4px 12px rgba(28,26,22,.04)!important;
+}
+
+/* PROBLEM IMAGE FRAME → glass */
+.problem-image-wrap{
+  background:rgba(255,255,255,.4)!important;
+  backdrop-filter:blur(20px) saturate(180%)!important;
+  -webkit-backdrop-filter:blur(20px) saturate(180%)!important;
+  border:1px solid rgba(255,255,255,.55)!important;
+  border-radius:24px!important;
+  box-shadow:0 1px 0 rgba(255,255,255,.6) inset,0 8px 24px rgba(28,26,22,.06)!important;
+}
+
+/* FINAL UI IMAGES on ASHLEY — transparent PNGs (device frames + composed mockups), no card wrapper */
+.final-ui-image{
+  background:transparent!important;
+  border:0!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+  overflow:visible!important;
+  display:flex!important;align-items:center!important;justify-content:center!important;
+}
+.final-ui-image img{
+  width:auto!important;height:auto!important;
+  max-width:100%!important;
+  max-height:380px!important;
+  border-radius:0!important;
+  background:transparent!important;
+  object-fit:contain!important;
+  filter:drop-shadow(0 12px 24px rgba(28,26,22,.12)) drop-shadow(0 24px 48px rgba(28,26,22,.08))!important;
+}
+
+/* JOURNEY STEPS (on dark sec) → dark glass cards */
+.journey-step{
+  background:rgba(255,255,255,.06)!important;
+  backdrop-filter:blur(20px) saturate(180%)!important;
+  -webkit-backdrop-filter:blur(20px) saturate(180%)!important;
+  border:1px solid rgba(255,255,255,.12)!important;
+  border-radius:20px!important;
+  box-shadow:0 1px 0 rgba(255,255,255,.08) inset,0 8px 32px rgba(0,0,0,.18)!important;
+}
+
+/* NEXT CASE CARD → glass */
+.next-case{
+  background:rgba(255,255,255,.55)!important;
+  backdrop-filter:blur(24px) saturate(180%)!important;
+  -webkit-backdrop-filter:blur(24px) saturate(180%)!important;
+  border-top:1px solid rgba(255,255,255,.55)!important;
+  box-shadow:0 1px 0 rgba(255,255,255,.6) inset!important;
+}
+
+/* ITALIC ACCENT TEXT — gradient on light sections, light blue on dark */
+.cs-sec-white h2 em,.cs-sec-bg h2 em,.cs-sec-bg2 h2 em{
+  background:linear-gradient(90deg,#7fa0c3,#3D6B9A,#7fa0c3,#a0c4e8)!important;
+  background-size:300%!important;
+  -webkit-background-clip:text!important;
+  background-clip:text!important;
+  -webkit-text-fill-color:transparent!important;
+  animation:gradtext 4s ease-in-out infinite!important;
+}
+.cs-hero h1 em,.cs-sec-dark h2 em,.cs-cta h2 em{
+  background:none!important;
+  -webkit-text-fill-color:#a0c4e8!important;
+  color:#a0c4e8!important;
+  animation:none!important;
+}
+
+/* CTA SECTION BUTTONS → unified pill system */
+.cs-cta .btn-cta{
+  background:linear-gradient(135deg,#7fa0c3 0%,#3D6B9A 50%,#5b8db5 100%)!important;
+  color:#fff!important;
+  padding:1.05rem 2rem!important;
+  font-size:.95rem!important;font-weight:600!important;
+  letter-spacing:.005em!important;
+  border-radius:100px!important;
+  border:1px solid rgba(255,255,255,.22)!important;
+  box-shadow:0 1px 0 rgba(255,255,255,.35) inset,0 10px 28px rgba(61,107,154,.32),0 2px 6px rgba(28,26,22,.1)!important;
+  position:relative!important;overflow:hidden!important;
+  display:inline-flex!important;align-items:center!important;gap:.5rem!important;
+  text-decoration:none!important;
+  transition:transform .25s cubic-bezier(.2,0,.2,1),box-shadow .25s ease,gap .25s ease!important;
+}
+.cs-cta .btn-cta::before{
+  content:""!important;position:absolute!important;top:0!important;left:0!important;right:0!important;height:50%!important;
+  background:linear-gradient(180deg,rgba(255,255,255,.25),rgba(255,255,255,0))!important;
+  pointer-events:none!important;border-radius:100px 100px 0 0!important;
+}
+.cs-cta .btn-cta:hover{
+  gap:.75rem!important;
+  box-shadow:0 1px 0 rgba(255,255,255,.4) inset,0 14px 36px rgba(61,107,154,.4),0 4px 10px rgba(28,26,22,.12)!important;
+  transform:translateY(-1px)!important;
+}
+.cs-cta .btn-ghost{
+  display:inline-flex!important;align-items:center!important;gap:.45rem!important;
+  background:rgba(255,255,255,.08)!important;
+  backdrop-filter:blur(20px) saturate(180%)!important;
+  -webkit-backdrop-filter:blur(20px) saturate(180%)!important;
+  border:1px solid rgba(255,255,255,.18)!important;
+  border-bottom:1px solid rgba(255,255,255,.18)!important;
+  color:rgba(255,255,255,.92)!important;
+  padding:.95rem 1.75rem!important;
+  border-radius:100px!important;
+  font-size:.92rem!important;font-weight:500!important;
+  text-decoration:none!important;
+  transition:background .2s ease!important;
+}
+.cs-cta .btn-ghost:hover{background:rgba(255,255,255,.14)!important;color:#fff!important;}
+
+/* Mobile — softer blur for performance */
+@media(max-width:760px){
+  .cs-hero,.cs-sec-dark,.cs-cta{
+    backdrop-filter:blur(20px) saturate(160%)!important;
+    -webkit-backdrop-filter:blur(20px) saturate(160%)!important;
+  }
+  .pain-list li,.problem-image-wrap,.journey-step,.next-case{
+    backdrop-filter:blur(16px) saturate(170%)!important;
+    -webkit-backdrop-filter:blur(16px) saturate(170%)!important;
+  }
+}
+/* ═══ END iOS 27 OVERLAY ═══ */
+
+
+/* ═══ iOS 27 OVERLAY — case study additional elements (v2) ═══ */
+
+/* RESULT CARDS (KPI metric panels — mg-tax, ashley) — DARK glass (sits on dark section) */
+.result-card{
+  background:rgba(255,255,255,.06)!important;
+  backdrop-filter:blur(20px) saturate(180%)!important;
+  -webkit-backdrop-filter:blur(20px) saturate(180%)!important;
+  border:1px solid rgba(255,255,255,.12)!important;
+  border-radius:20px!important;
+  box-shadow:0 1px 0 rgba(255,255,255,.08) inset,0 8px 28px rgba(0,0,0,.18)!important;
+  transition:background .2s ease,transform .2s ease,border-color .2s ease!important;
+}
+.result-card:hover{background:rgba(255,255,255,.1)!important;border-color:rgba(160,196,232,.28)!important;}
+.result-card .result-n{color:#a0c4e8!important;}
+.result-card .result-n em{color:#a0c4e8!important;-webkit-text-fill-color:#a0c4e8!important;background:none!important;font-style:normal!important;}
+.result-card .result-l{color:rgba(255,255,255,.75)!important;}
+
+/* WIREFRAME CARDS (mg-tax, ashley) */
+.wireframe-card{
+  background:rgba(255,255,255,.55)!important;
+  backdrop-filter:blur(24px) saturate(180%)!important;
+  -webkit-backdrop-filter:blur(24px) saturate(180%)!important;
+  border:1px solid rgba(255,255,255,.55)!important;
+  border-radius:20px!important;
+  box-shadow:0 1px 0 rgba(255,255,255,.6) inset,0 8px 24px rgba(28,26,22,.06)!important;
+  overflow:hidden!important;
+}
+.wireframe-label{color:var(--text-mid)!important;}
+
+/* TESTIMONIAL BLOCK (marissa, mg-tax, ashley) — DARK glass (sits on dark section) */
+.testimonial-block{
+  background:rgba(255,255,255,.06)!important;
+  backdrop-filter:blur(28px) saturate(180%)!important;
+  -webkit-backdrop-filter:blur(28px) saturate(180%)!important;
+  border:1px solid rgba(255,255,255,.12)!important;
+  border-radius:24px!important;
+  box-shadow:0 1px 0 rgba(255,255,255,.08) inset,0 12px 36px rgba(0,0,0,.2)!important;
+}
+.testimonial-block .testi-q{color:rgba(255,255,255,.85)!important;}
+.testimonial-block .testi-q em{color:#a0c4e8!important;-webkit-text-fill-color:#a0c4e8!important;background:none!important;}
+.testimonial-block .testi-name{color:#fff!important;}
+.testimonial-block .testi-role{color:rgba(255,255,255,.55)!important;}
+
+/* SITE PREVIEW (marissa, becca) — browser mockup card */
+.site-preview{
+  background:rgba(255,255,255,.7)!important;
+  backdrop-filter:blur(28px) saturate(180%)!important;
+  -webkit-backdrop-filter:blur(28px) saturate(180%)!important;
+  border:1px solid rgba(255,255,255,.6)!important;
+  border-radius:20px!important;
+  box-shadow:0 1px 0 rgba(255,255,255,.7) inset,0 12px 36px rgba(28,26,22,.1)!important;
+  overflow:hidden!important;
+}
+.site-preview-bar{
+  background:rgba(255,255,255,.55)!important;
+  border-bottom:1px solid rgba(255,255,255,.5)!important;
+}
+
+/* BUILD IMAGE (marissa, becca) — image showcase frame */
+.build-image{
+  border:1px solid rgba(255,255,255,.55)!important;
+  border-radius:24px!important;
+  box-shadow:0 1px 0 rgba(255,255,255,.6) inset,0 12px 36px rgba(28,26,22,.1)!important;
+  overflow:hidden!important;
+}
+
+/* STRATEGY CARDS (becca) */
+.strategy-card{
+  background:rgba(255,255,255,.55)!important;
+  backdrop-filter:blur(24px) saturate(180%)!important;
+  -webkit-backdrop-filter:blur(24px) saturate(180%)!important;
+  border:1px solid rgba(255,255,255,.55)!important;
+  border-radius:20px!important;
+  box-shadow:0 1px 0 rgba(255,255,255,.6) inset,0 8px 24px rgba(28,26,22,.06)!important;
+}
+
+/* ITERATION NOTE (mg-tax, ashley) — small inline callout */
+.iteration-note{
+  background:rgba(127,160,195,.12)!important;
+  backdrop-filter:blur(16px) saturate(160%)!important;
+  -webkit-backdrop-filter:blur(16px) saturate(160%)!important;
+  border:1px solid rgba(127,160,195,.32)!important;
+  border-radius:12px!important;
+  color:var(--accent2)!important;
+}
+
+/* SOLUTION TAG — small pill */
+.solution-tag{
+  background:rgba(127,160,195,.16)!important;
+  backdrop-filter:blur(16px) saturate(160%)!important;
+  -webkit-backdrop-filter:blur(16px) saturate(160%)!important;
+  border:1px solid rgba(127,160,195,.35)!important;
+  color:var(--accent2)!important;
+  box-shadow:0 1px 0 rgba(255,255,255,.5) inset!important;
+}
+
+/* JOURNEY STATUS BADGES (little-book) */
+.journey-step-old{
+  background:rgba(201,122,122,.1)!important;
+  backdrop-filter:blur(12px) saturate(160%)!important;
+  -webkit-backdrop-filter:blur(12px) saturate(160%)!important;
+  border:1px solid rgba(201,122,122,.25)!important;
+  border-radius:10px!important;
+}
+.journey-step-new{
+  background:rgba(127,160,195,.12)!important;
+  backdrop-filter:blur(12px) saturate(160%)!important;
+  -webkit-backdrop-filter:blur(12px) saturate(160%)!important;
+  border:1px solid rgba(127,160,195,.3)!important;
+  border-radius:10px!important;
+}
+
+/* HERO META STRIP — even-distribution grid of soft outlined chips */
+.cs-meta{
+  display:grid!important;
+  grid-template-columns:repeat(auto-fit,minmax(160px,1fr))!important;
+  gap:.75rem!important;
+}
+.cs-meta-item{
+  background:rgba(255,255,255,.06)!important;
+  backdrop-filter:blur(12px) saturate(160%)!important;
+  -webkit-backdrop-filter:blur(12px) saturate(160%)!important;
+  border:1px solid rgba(255,255,255,.14)!important;
+  border-radius:14px!important;
+  padding:.75rem 1rem!important;
+  min-width:0!important;
+}
+@media(max-width:760px){
+  .cs-meta{grid-template-columns:repeat(2,1fr)!important;gap:.6rem!important;}
+}
+
+/* BACK-TO-TOP BUTTON (.btt) — glass pill */
+.btt{
+  background:rgba(255,255,255,.6)!important;
+  backdrop-filter:blur(20px) saturate(180%)!important;
+  -webkit-backdrop-filter:blur(20px) saturate(180%)!important;
+  border:1px solid rgba(255,255,255,.6)!important;
+  box-shadow:0 1px 0 rgba(255,255,255,.7) inset,0 6px 20px rgba(28,26,22,.1)!important;
+}
+.btt:hover{background:rgba(255,255,255,.8)!important;}
+.btt-arrow{color:var(--accent2)!important;}
+.btt-ring{stroke:var(--accent2)!important;}
+
+/* CS-BACK link — pill chip */
+.cs-back{
+  display:inline-flex!important;align-items:center!important;gap:.4rem!important;
+  background:rgba(255,255,255,.08)!important;
+  backdrop-filter:blur(16px) saturate(160%)!important;
+  -webkit-backdrop-filter:blur(16px) saturate(160%)!important;
+  border:1px solid rgba(255,255,255,.18)!important;
+  border-radius:100px!important;
+  padding:.45rem 1rem!important;
+  color:rgba(255,255,255,.85)!important;
+  text-decoration:none!important;
+}
+.cs-back:hover{background:rgba(255,255,255,.14)!important;color:#fff!important;}
+.cs-back::before{display:none!important;}
+
+/* ═══ END iOS 27 OVERLAY v2 ═══ */
+
+</style>
+</head>
+<body>
+
+<div class="toast" id="toast">✓ Copied to clipboard</div>
+
+<!-- NAV -->
+<nav>
+  <a href="/" class="nav-logo"><img src="logo.png" alt="Mac Landon"></a>
+  <ul class="nav-links">
+    <li><a href="/#services">Services</a></li>
+    <li><a href="/#pricing">Pricing</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="/blog.html">Blog</a></li>
+    <li><a href="/audit.html">Audit</a></li>
+  </ul>
+  <a href="/blog.html" class="nav-mobile-blog" style="font-size:.72rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.65);text-decoration:none;display:none;">Blog</a>
+  <div class="nav-right">
+    <span class="nav-li"><a href="https://www.linkedin.com/in/maclandon/" target="_blank" rel="noopener" aria-label="LinkedIn">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+    </a></span>
+    <span class="nav-li"><a href="https://www.instagram.com/bymaclandon" target="_blank" rel="noopener" aria-label="Instagram">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+    </a></span>
+    <a href="https://calendly.com/maclandon/30min" target="_blank" class="nav-cta">Book a Call</a>
+  </div>
+  <button class="menu-text-btn" id="hamburger" aria-label="Menu">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+  </button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <div class="mobile-menu-card">
+    <a href="/#services">Services</a>
+    <a href="/#pricing">Pricing</a>
+    <a href="about.html">About</a>
+    <a href="/blog.html">Blog</a>
+    <a href="/audit.html">Audit</a>
+    <a href="https://calendly.com/maclandon/30min" target="_blank">Book a Call</a>
+  </div>
+</div>
+
+<main>
+
+<!-- HERO -->
+<section class="cs-hero">
+  <div class="cs-hero-inner">
+    <a href="/" class="cs-back reveal">Back to Home</a>
+    <div class="cs-hero-eyebrow reveal">Case Study</div>
+    <h1 class="reveal d1">Download Designs by AND: <em>From zero to profitable Etsy shop</em> in 8 months.</h1>
+    <p class="cs-hero-sub reveal d2">Ashley had raw design talent, a creative vision, and zero business foundation. No brand, no shop, no pricing strategy, no idea where to start. Here's how I built it all from scratch.</p>
+    <div class="cs-meta reveal d3">
+      <div class="cs-meta-item">
+        <div class="cs-meta-label">Client</div>
+        <div class="cs-meta-value">Download Designs by AND</div>
+      </div>
+      <div class="cs-meta-item">
+        <div class="cs-meta-label">Industry</div>
+        <div class="cs-meta-value">Etsy / Print-on-Demand</div>
+      </div>
+      <div class="cs-meta-item">
+        <div class="cs-meta-label">Timeline</div>
+        <div class="cs-meta-value">8 months</div>
+      </div>
+      <div class="cs-meta-item">
+        <div class="cs-meta-label">Services</div>
+        <div class="cs-meta-value">Brand, Shop Setup, SEO</div>
+      </div>
+      <div class="cs-meta-item">
+        <div class="cs-meta-label">Result</div>
+        <div class="cs-meta-value">Profitable in month 1</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STAT BAR -->
+<div class="cs-stats">
+  <div class="cs-stats-inner">
+    <div class="cs-stat">
+      <div class="cs-stat-n"><em>52</em>%</div>
+      <div class="cs-stat-l">Profit margin by month 8</div>
+    </div>
+    <div class="cs-stat">
+      <div class="cs-stat-n"><em>74</em></div>
+      <div class="cs-stat-l">Orders in first 8 months</div>
+    </div>
+    <div class="cs-stat">
+      <div class="cs-stat-n"><em>4.8</em> ★</div>
+      <div class="cs-stat-l">Average Etsy star rating</div>
+    </div>
+    <div class="cs-stat">
+      <div class="cs-stat-n">Mo <em>1</em></div>
+      <div class="cs-stat-l">Profitable in the first full month</div>
+    </div>
+  </div>
+</div>
+
+<!-- THE PROBLEM -->
+<section class="cs-sec cs-sec-white">
+  <div class="inner">
+    <div class="reveal">
+      <div class="sec-tag">The Problem</div>
+      <h2>Talent without infrastructure <em>goes nowhere.</em></h2>
+    </div>
+    <div class="problem-grid">
+      <div>
+        <p class="cs-body">Ashley had something real: a genuine design eye, a creative vision, and the drive to build something of her own. But having talent and having a business are two completely different things. She had no brand, no shop, no pricing strategy, and no idea what order to do any of it in.</p>
+        <p class="cs-body">Without the right foundation, even great products don't sell. Etsy is a competitive marketplace, and listings that aren't optimized don't get found. Prices that aren't calculated carefully lead to selling at a loss. A storefront with no brand identity gets scrolled past. Ashley needed everything built from scratch, in the right order.</p>
+        <ul class="pain-list">
+          <li>No brand identity: no logo, colors, or visual language</li>
+          <li>No Etsy shop, starting completely from zero</li>
+          <li>No pricing strategy, no idea what to charge or why</li>
+          <li>No SEO knowledge, so listings would be invisible</li>
+          <li>No social media presence to drive traffic</li>
+          <li>No system for managing orders or customer communication</li>
+        </ul>
+      </div>
+      <div>
+        <div style="aspect-ratio:4/5;border-radius:20px;overflow:hidden;">
+          <img src="ashley-portrait.webp" alt="Ashley DeMaria" style="width:100%;height:100%;object-fit:cover;">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- USER JOURNEY -->
+<section class="cs-sec cs-sec-dark">
+  <div class="inner">
+    <div class="reveal">
+      <div class="sec-tag light">The User Journey</div>
+      <h2>Mapping the path from <em>idea to income.</em></h2>
+      <p class="cs-body-light" style="max-width:560px;margin-bottom:0;">Before building anything, I mapped the full customer journey: from how a shopper discovers Ashley's products to how they become a repeat buyer. Each gap was a build opportunity.</p>
+    </div>
+    <div class="journey-steps">
+      <div class="journey-step">
+        <div class="journey-step-n">01</div>
+        <div class="journey-step-title">Brand Identity</div>
+        <div class="journey-step-desc">What does the shop look like and feel like? What makes it recognizable?</div>
+        <div class="journey-step-old">❌ Before: No brand. No name consistency. No visual identity whatsoever.</div>
+        <div class="journey-step-new">✓ After: Logo, color palette, typography system, and brand voice defined.</div>
+      </div>
+      <div class="journey-step">
+        <div class="journey-step-n">02</div>
+        <div class="journey-step-title">Shop Setup & Structure</div>
+        <div class="journey-step-desc">How is the Etsy shop organized so buyers can find and trust it?</div>
+        <div class="journey-step-old">❌ Before: No shop. Zero presence on any platform.</div>
+        <div class="journey-step-new">✓ After: Fully built Etsy storefront: banner, bio, policies, sections.</div>
+      </div>
+      <div class="journey-step">
+        <div class="journey-step-n">03</div>
+        <div class="journey-step-title">Listing Strategy & SEO</div>
+        <div class="journey-step-desc">How do shoppers find Ashley's products in Etsy search?</div>
+        <div class="journey-step-old">❌ Before: No listings. No keyword knowledge. Would be invisible.</div>
+        <div class="journey-step-new">✓ After: SEO-optimized titles, tags, and descriptions for every product.</div>
+      </div>
+      <div class="journey-step">
+        <div class="journey-step-n">04</div>
+        <div class="journey-step-title">Pricing Strategy</div>
+        <div class="journey-step-desc">How does Ashley price products to actually make money?</div>
+        <div class="journey-step-old">❌ Before: No pricing framework. Risk of selling at a loss without knowing it.</div>
+        <div class="journey-step-new">✓ After: Custom pricing calculator accounting for COGS, fees, and target margin.</div>
+      </div>
+      <div class="journey-step">
+        <div class="journey-step-n">05</div>
+        <div class="journey-step-title">Social Media Launch</div>
+        <div class="journey-step-desc">How does Ashley drive traffic to her shop beyond Etsy search?</div>
+        <div class="journey-step-old">❌ Before: No social presence. No way to generate external traffic.</div>
+        <div class="journey-step-new">✓ After: Launch plan with content pillars, posting cadence, and link-in-bio.</div>
+      </div>
+      <div class="journey-step">
+        <div class="journey-step-n">06</div>
+        <div class="journey-step-title">Customer Engagement</div>
+        <div class="journey-step-desc">How does Ashley turn one-time buyers into repeat customers and reviews?</div>
+        <div class="journey-step-old">❌ Before: No follow-up system. No review strategy.</div>
+        <div class="journey-step-new">✓ After: Post-purchase message templates, review request timing, and thank-you inserts.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WIREFRAMES & ITERATIONS -->
+<section class="cs-sec cs-sec-bg">
+  <div class="inner">
+    <div class="reveal">
+      <div class="sec-tag">Wireframes & Iterations</div>
+      <h2>Designing the brand before <em>building the shop.</em></h2>
+      <p class="cs-body" style="max-width:560px;margin-bottom:2rem;">The instinct is to open Etsy and start listing. That's the wrong order. Brand identity had to come first — the shop needed to look intentional from day one, not like it was figured out along the way.</p>
+    </div>
+    <div class="wireframe-grid">
+      <div class="wireframe-card">
+        <div class="wireframe-label">V1 — Logo Concepts</div>
+        <img src="ashley-logo-v1.webp" alt="Logo V1 explorations" loading="lazy" style="width:100%;display:block;object-fit:cover;">
+      </div>
+      <div class="wireframe-card">
+        <div class="wireframe-label">Final — Logo & Color Palette</div>
+        <img src="ashley-brand-final.webp" alt="Final brand system" loading="lazy" style="width:100%;display:block;object-fit:cover;">
+      </div>
+      <div class="wireframe-card">
+        <div class="wireframe-label">V1 — Etsy Storefront Layout</div>
+        <img src="ashley-storefront-v1.webp" alt="Etsy storefront wireframe" loading="lazy" style="width:100%;display:block;object-fit:cover;">
+      </div>
+      <div class="wireframe-card">
+        <div class="wireframe-label">Final — Pricing Calculator</div>
+        <img src="ashley-pricing-calculator.webp" alt="Final pricing calculator" loading="lazy" style="width:100%;display:block;object-fit:cover;">
+      </div>
+    </div>
+    <div class="iteration-note">
+      <p><strong>Key insight:</strong> The first logo direction was too generic. It could have belonged to any creative shop. After reviewing Ashley's actual product aesthetic, we pivoted to something bolder and more distinctive. The final mark is immediately recognizable and scales well across Etsy banners, packaging inserts, and social media.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL UI SOLUTION -->
+<section class="cs-sec cs-sec-white">
+  <div class="inner">
+    <div class="reveal">
+      <div class="sec-tag">The Build</div>
+      <h2>Four deliverables. One <em>complete foundation.</em></h2>
+    </div>
+
+    <div class="final-ui-grid" style="margin-top:3rem;">
+      <div>
+        <div class="solution-tag">01 — Brand Identity</div>
+        <h3 style="font-family:'Fraunces',serif;font-size:1.5rem;font-weight:700;color:var(--text);margin-bottom:.75rem;line-height:1.2;">A brand that looked intentional from day one.</h3>
+        <p class="cs-body">Built a complete visual identity system (logo, color palette, and typography) designed to stand out in a crowded Etsy marketplace and scale consistently across packaging, social, and product mockups.</p>
+        <ul class="solution-list">
+          <li>Primary logo + alternate lockups for different contexts</li>
+          <li>Color palette with hex values and usage guidelines</li>
+          <li>Typography pairing for headings and body text</li>
+          <li>Etsy shop banner and profile image sized correctly</li>
+        </ul>
+      </div>
+      <div>
+        <div class="final-ui-image">
+          <img src="ashley-brand-identity.png" alt="Brand identity" loading="lazy" style="width:100%;display:block;border-radius:16px;">
+        </div>
+      </div>
+    </div>
+
+    <div class="final-ui-grid reverse" style="margin-top:3rem;">
+      <div>
+        <div class="solution-tag">02 — Etsy Shop Setup & SEO</div>
+        <h3 style="font-family:'Fraunces',serif;font-size:1.5rem;font-weight:700;color:var(--text);margin-bottom:.75rem;line-height:1.2;">A storefront that gets found and converts.</h3>
+        <p class="cs-body">Built out the full Etsy storefront and optimized every listing for Etsy search. Titles, tags, and descriptions were researched and written for discoverability — not just description. Good products that no one can find don't sell.</p>
+        <ul class="solution-list">
+          <li>Complete Etsy shop setup: sections, policies, bio</li>
+          <li>Keyword research for each product category</li>
+          <li>SEO-optimized titles and 13-tag strategy per listing</li>
+          <li>Product description framework for trust and conversion</li>
+        </ul>
+      </div>
+      <div>
+        <div class="final-ui-image">
+          <img src="ashley-etsy-storefront.png" alt="Etsy storefront" loading="lazy" style="width:100%;display:block;border-radius:16px;">
+        </div>
+      </div>
+    </div>
+
+    <div class="final-ui-grid" style="margin-top:3rem;">
+      <div>
+        <div class="solution-tag">03 — Pricing Calculator</div>
+        <h3 style="font-family:'Fraunces',serif;font-size:1.5rem;font-weight:700;color:var(--text);margin-bottom:.75rem;line-height:1.2;">Never sell at a loss again.</h3>
+        <p class="cs-body">Built a custom spreadsheet calculator that factors in production cost, Etsy transaction fees, shipping materials, and target profit margin. Ashley can now price any new product in under two minutes and know exactly what she'll make.</p>
+        <ul class="solution-list">
+          <li>Inputs: COGS, materials, time, and Etsy fee structure</li>
+          <li>Output: minimum price, recommended price, and margin</li>
+          <li>Automatically adjusts for Etsy's 6.5% transaction fee</li>
+          <li>Reusable template for every new product</li>
+        </ul>
+      </div>
+      <div>
+        <div class="final-ui-image">
+          <img src="ashley-pricing-calculator.png" alt="Pricing calculator" loading="lazy" style="width:100%;display:block;border-radius:16px;">
+        </div>
+      </div>
+    </div>
+
+    <div class="final-ui-grid reverse" style="margin-top:3rem;">
+      <div>
+        <div class="solution-tag">04 — Social Media Launch Plan</div>
+        <h3 style="font-family:'Fraunces',serif;font-size:1.5rem;font-weight:700;color:var(--text);margin-bottom:.75rem;line-height:1.2;">Driving traffic from day one.</h3>
+        <p class="cs-body">Built a social media launch strategy to drive external traffic to the Etsy shop from Instagram. Content pillars, posting frequency, hashtag strategy, and a link-in-bio setup so every post had somewhere to send people.</p>
+        <ul class="solution-list">
+          <li>Instagram content pillars: product, process, lifestyle</li>
+          <li>Launch week posting schedule with captions</li>
+          <li>Hashtag research and tiered strategy</li>
+          <li>Link-in-bio setup with Etsy shop CTA</li>
+        </ul>
+      </div>
+      <div>
+        <div class="final-ui-image">
+          <img src="ashley-social-plan-mobile.png" alt="Social media launch plan" loading="lazy" style="width:100%;display:block;border-radius:16px;">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RESULTS -->
+<section class="cs-sec cs-sec-dark">
+  <div class="inner">
+    <div class="reveal">
+      <div class="sec-tag light">The Results</div>
+      <h2>Profitable in month one. <em>Still selling eight months later.</em></h2>
+      <p class="cs-body-light" style="max-width:520px;margin-bottom:0;">The shop launched and hit profitability within its first full month. Eight months in, here's where it stood.</p>
+    </div>
+    <div class="results-grid">
+      <div class="result-card">
+        <div class="result-n"><em>2</em> min</div>
+        <div class="result-l">Time to price a new product using the custom calculator</div>
+      </div>
+      <div class="result-card">
+        <div class="result-n">Page <em>1</em></div>
+        <div class="result-l">Etsy search ranking achieved for primary keywords</div>
+      </div>
+      <div class="result-card">
+        <div class="result-n"><em>13</em></div>
+        <div class="result-l">Optimized tags implemented across all active listings</div>
+      </div>
+      <div class="result-card">
+        <div class="result-n">0<em>→</em>1</div>
+        <div class="result-l">Brand, shop, pricing, and social built from scratch</div>
+      </div>
+    </div>
+    <div class="testimonial-block">
+      <p class="testi-q">"Mac helped me turn my dream of a successful Etsy shop into reality. From brand identity to listing optimization, <em>my shop has grown beyond what I imagined.</em>"</p>
+      <div class="testi-person">
+        <img src="ashtest.webp" alt="Ashley DeMaria" class="testi-avatar">
+        <div>
+          <div class="testi-name">Ashley DeMaria</div>
+          <div class="testi-role">Founder, Download Designs by AND</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cs-cta">
+  <div class="cs-cta-eyebrow reveal">Ready to do this for your business?</div>
+  <h2 class="reveal d1">Your operation could run <em>this smoothly.</em></h2>
+  <p class="reveal d2">Book a free 30-minute call. I'll listen to what's going on and come back with a clear picture of what's possible.</p>
+  <div class="cs-cta-btns reveal d3">
+    <a href="https://calendly.com/maclandon/30min" target="_blank" class="btn-cta">Book a free call →</a>
+    <a href="/" class="btn-ghost">See all work</a>
+  </div>
+</section>
+
+<!-- NEXT CASE STUDY -->
+<a href="little-book.html" class="next-case">
+  <div class="next-case-img"><img src="little-book-co-product-hero.webp" alt="Little Book Co." loading="lazy"></div>
+  <div>
+    <div class="next-case-label">Next Case Study</div>
+    <div class="next-case-title">Little Book Co: <em>From viral views to a seamless revenue engine.</em></div>
+  </div>
+  <svg class="next-case-arrow" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+</a>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-logo"><img src="logo.png" alt="Mac Landon" loading="lazy"></div>
+    <ul class="footer-links">
+      <li><a href="about.html">About</a></li>
+      <li><a href="/#services">Services</a></li>
+      <li><a href="/#pricing">Pricing</a></li>
+      <li><a href="/#contact">Contact</a></li>
+    </ul>
+    <div class="footer-social">
+      <a href="https://www.linkedin.com/in/maclandon/" target="_blank" rel="noopener">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        LinkedIn
+      </a>
+      <a href="https://www.instagram.com/bymaclandon" target="_blank" rel="noopener">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+        Instagram
+      </a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2026 Mac Landon. All rights reserved.</div>
+    <div class="footer-loc">New York City · Remote Nationwide</div>
+  </div>
+</footer>
+
+<script>
+// Scroll reveal
+const obs = new IntersectionObserver(es => es.forEach(e => {
+  if (e.isIntersecting) e.target.classList.add('on');
+}), {threshold: .08});
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+// Back to top with scroll ring
+document.body.insertAdjacentHTML('beforeend',`<div class="btt" id="btt">
+  <svg viewBox="0 0 36 36" class="btt-ring">
+    <circle cx="18" cy="18" r="15" fill="none" stroke="rgba(255,255,255,.1)" stroke-width="2"/>
+    <circle cx="18" cy="18" r="15" fill="none" stroke="#7fa0c3" stroke-width="2"
+      stroke-dasharray="94.2" stroke-dashoffset="94.2"
+      id="bttCircle" stroke-linecap="round" transform="rotate(-90 18 18)"/>
+  </svg>
+  <svg class="btt-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+    <path d="M12 19V5M5 12l7-7 7 7"/>
+  </svg>
+</div>`);
+const btt=document.getElementById('btt');
+const bttCircle=document.getElementById('bttCircle');
+const circumference=94.2;
+window.addEventListener('scroll',()=>{
+  const scrolled=window.scrollY;
+  const total=document.documentElement.scrollHeight-window.innerHeight;
+  const pct=scrolled/total;
+  bttCircle.style.strokeDashoffset=circumference-(pct*circumference);
+  if(scrolled>300)btt.classList.add('show');
+  else btt.classList.remove('show');
+});
+btt.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+
+// Nav hide/show on scroll
+let lastScroll = 0;
+const nav = document.querySelector('nav');
+window.addEventListener('scroll', () => {
+  const current = window.scrollY;
+  if (current > lastScroll && current > 100) {
+    nav.style.transform = 'translateY(-100%)';
+    nav.style.transition = 'transform .3s ease';
+  } else {
+    nav.style.transform = 'translateY(0)';
+  }
+  lastScroll = current;
+});
+
+// Hamburger
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
+const hamburgerIcon = `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>`;
+const closeIcon = `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>`;
+hamburger.addEventListener('click', () => {
+  const isOpen = mobileMenu.classList.toggle('open');
+  hamburger.innerHTML = isOpen ? closeIcon : hamburgerIcon;
+});
+mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+  mobileMenu.classList.remove('open');
+  hamburger.innerHTML = hamburgerIcon;
+}));
+mobileMenu.addEventListener('click', e => {
+  if(e.target === mobileMenu){ mobileMenu.classList.remove('open'); hamburger.innerHTML = hamburgerIcon; }
+});
+</script>
+</body>
+</html>

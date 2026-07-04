@@ -1,0 +1,370 @@
+/* ===== RESET & VARIABLES ===== */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --bg:#E8E4DC;
+  --bg2:#DDD9D0;
+  --white:#FAFAF7;
+  --card:#F5F2EC;
+  --border:#D0CAC0;
+  --text:#1C1A16;
+  --text-mid:#48443C;
+  --text-muted:#7A7468;
+  --accent:#7fa0c3;
+  --accent2:#3D6B9A;
+  --dark:#1C1A16;
+  --dark2:#2A2720;
+}
+html{overflow-x:hidden;}
+body{font-family:"DM Sans",sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;-webkit-font-smoothing:antialiased;animation:pagefade .6s ease forwards;}
+@keyframes pagefade{from{opacity:0;}to{opacity:1;}}
+
+/* ===== NAV =====
+   Legacy non-pill nav rule removed 2026-06-26 — was leaking top:0;left:0;right:0;
+   and justify-content:space-between into the new Liquid Glass pill rules below.
+   All nav layout now comes from the floating pill rule further down. */
+nav{z-index:100;}
+.nav-logo img{height:26px;width:auto;display:block;opacity:.9;}
+.nav-links{display:flex;gap:2rem;list-style:none;}
+.nav-links a{font-size:.72rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.65);text-decoration:none;transition:color .15s;position:relative;}
+.nav-links a::after{content:"";position:absolute;bottom:-2px;left:50%;width:0;height:2px;background:#7fa0c3;transition:width .3s ease,left .3s ease;}
+.nav-links a:hover::after{width:100%;left:0;}
+.nav-links a:hover{color:rgba(255,255,255,.85);}
+.nav-right{display:flex;align-items:center;gap:1rem;}
+.nav-li a{color:rgba(255,255,255,.65);text-decoration:none;transition:color .15s;display:flex;align-items:center;}
+.nav-li a:hover{color:rgba(255,255,255,.8);}
+.nav-cta{font-size:.72rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#fff;border:1px solid rgba(255,255,255,.25);padding:.45rem 1.1rem;border-radius:4px;text-decoration:none;transition:all .2s;}
+.nav-cta:hover{background:var(--accent);border-color:var(--accent);}
+
+/* ===== MOBILE MENU ===== */
+.menu-text-btn{display:none;background:none;border:none;cursor:pointer;font-family:"DM Sans",sans-serif;font-size:.72rem;font-weight:500;letter-spacing:.1em;color:rgba(255,255,255,.5);text-transform:uppercase;transition:color .2s ease;padding:0;}
+.menu-text-btn:hover{color:#fff;}
+.mobile-menu{position:fixed;inset:0;z-index:99;background:rgba(0,0,0,.4);opacity:0;pointer-events:none;transition:opacity .2s ease;}
+.mobile-menu.open{opacity:1;pointer-events:auto;}
+.mobile-menu-card{position:absolute;top:calc(56px + 8px);right:16px;background:rgba(43,42,38,.96);border-radius:16px;padding:6px 0;width:170px;transform:scale(.85);transform-origin:top right;opacity:0;transition:transform .2s cubic-bezier(.2,0,.2,1),opacity .15s ease;box-shadow:0 8px 32px rgba(0,0,0,.3);}
+.mobile-menu.open .mobile-menu-card{transform:scale(1);opacity:1;}
+.mobile-menu-card a{display:block;font-size:.9rem;font-weight:400;color:rgba(255,255,255,.75);text-decoration:none;letter-spacing:.02em;font-family:"DM Sans",sans-serif;padding:10px 20px;transition:background .15s;}
+.mobile-menu-card a:hover{background:rgba(255,255,255,.06);}
+.mobile-menu-card a:last-child{color:var(--accent);border-top:1px solid rgba(255,255,255,.08);margin-top:4px;padding-top:14px;}
+
+/* ===== BUTTONS ===== */
+.btn-dark{display:inline-flex;align-items:center;gap:.4rem;background:var(--dark);color:#fff;font-size:.88rem;font-weight:500;padding:.8rem 1.6rem;border-radius:6px;text-decoration:none;transition:background .2s,gap .2s;white-space:nowrap;}
+.btn-dark:hover{background:var(--dark2);gap:.65rem;}
+.btn-soft{font-size:.88rem;color:var(--text-muted);text-decoration:none;border-bottom:1px solid var(--border);padding-bottom:2px;transition:color .2s;white-space:nowrap;}
+.btn-soft:hover{color:var(--text);}
+.btn-accent{display:inline-flex;align-items:center;gap:.4rem;background:var(--accent);color:#fff;font-size:.88rem;font-weight:500;padding:.8rem 1.6rem;border-radius:6px;text-decoration:none;transition:background .2s,gap .2s;}
+.btn-accent:hover{background:var(--accent2);gap:.65rem;}
+.btn-cta{display:inline-flex;align-items:center;gap:.4rem;background:var(--white);color:var(--dark);font-size:.9rem;font-weight:500;padding:.8rem 1.8rem;border-radius:6px;text-decoration:none;transition:background .2s,gap .2s;}
+.btn-cta:hover{background:var(--card);gap:.65rem;}
+.btn-cta-ghost{font-size:.9rem;color:rgba(255,255,255,.7);text-decoration:none;border-bottom:1px solid rgba(255,255,255,.15);padding-bottom:2px;transition:color .2s;}
+.btn-cta-ghost:hover{color:rgba(255,255,255,.75);}
+.btn-submit{display:inline-flex;align-items:center;justify-content:center;gap:.4rem;background:var(--dark);color:#fff;font-size:.92rem;font-weight:500;padding:.9rem 2rem;border-radius:6px;border:none;cursor:pointer;transition:background .2s;font-family:"DM Sans",sans-serif;width:100%;}
+.btn-submit:hover{background:var(--dark2);}
+.btn-dark:active,.btn-accent:active,.nav-cta:active,.btn-price:active,.btn-cta:active{transform:scale(.96);transition:transform .1s ease;}
+
+
+/* ===== SHARED TYPOGRAPHY ===== */
+.sec-tag{font-size:.75rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:.85rem;display:flex;align-items:center;gap:.5rem;}
+.sec-tag::before{content:"";width:14px;height:1.5px;background:var(--accent);}
+.sec-h2{font-family:"Fraunces",serif;font-size:clamp(1.8rem,2.8vw,2.6rem);font-weight:700;line-height:1.1;letter-spacing:-.025em;color:var(--text);margin-bottom:1.5rem;}
+.sec-h2 em{font-style:italic;color:var(--accent);}
+.about-h em,
+.case-h em,
+.cta-h em,
+.blog-hero h1 em {
+  font-style:italic;
+  font-weight:700;
+  color:var(--accent);
+}
+@keyframes gradtext{0%{background-position:0%;}50%{background-position:100%;}100%{background-position:0%;}}
+
+/* ===== LOGO DRAW ===== */
+.logo-path{stroke:#E8E4DC;stroke-width:2;fill:none;stroke-dasharray:3000;stroke-dashoffset:3000;animation:draw 6s ease forwards;}
+@keyframes draw{to{stroke-dashoffset:0;}}
+
+
+/* ===== REVEAL SYSTEM ===== */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .8s ease,transform .8s ease;}
+.reveal.on{opacity:1;transform:translateY(0);}
+.d1{transition-delay:.1s;}.d2{transition-delay:.2s;}.d3{transition-delay:.3s;}
+@keyframes up{to{opacity:1;transform:translateY(0);}}
+@keyframes fadeIn{to{opacity:1;}}
+@media(prefers-reduced-motion:reduce){
+  .reveal{transition:none;opacity:1;transform:none;}
+  *,*::before,*::after{animation-duration:.01ms !important;transition-duration:.01ms !important;}
+}
+
+/* ===== FORM MESSAGES ===== */
+.form-message{font-size:.85rem;padding:.65rem 1rem;border-radius:6px;margin-top:.5rem;display:none;}
+.form-message.error{display:block;background:rgba(220,53,69,.08);color:#c0392b;border:1px solid rgba(220,53,69,.15);}
+.form-message.success{display:block;background:rgba(46,125,50,.08);color:#2e7d32;border:1px solid rgba(46,125,50,.15);}
+
+/* ===== TOAST ===== */
+.toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(20px);background:var(--dark);color:#fff;font-size:.8rem;padding:.6rem 1.25rem;border-radius:100px;opacity:0;transition:all .3s ease;pointer-events:none;z-index:999;}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+/* ===== BACK TO TOP ===== */
+.btt{position:fixed;bottom:2rem;right:2rem;width:44px;height:44px;background:var(--dark);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:98;opacity:0;transform:scale(.8);transition:opacity .3s ease,transform .3s ease;box-shadow:0 4px 16px rgba(0,0,0,.2);}
+.btt.show{opacity:1;transform:scale(1);}
+.btt-ring{position:absolute;inset:0;width:100%;height:100%;}
+.btt-arrow{width:16px;height:16px;color:#fff;position:relative;z-index:1;}
+.btt:hover{background:var(--dark2);}
+.btt:hover .btt-arrow{color:#7fa0c3;}
+
+/* ===== STICKY CTA ===== */
+.sticky-cta{display:none;}
+
+/* ===== FOOTER (iOS 27 / Liquid Glass pill chips — single source of truth) ===== */
+footer{background:rgba(28,26,22,.96)!important;padding:3rem 2rem 2rem!important;}
+.footer-top{max-width:1100px;margin:0 auto;display:flex;flex-direction:column;align-items:center;gap:1.5rem;}
+.footer-logo img{height:28px;width:auto;opacity:.95;}
+.footer-links{display:flex;flex-wrap:wrap;gap:.5rem;justify-content:center;list-style:none;padding:0;margin:0;}
+.footer-links li{margin:0;}
+.footer-links a{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:.55rem 1.1rem;
+  border-radius:100px;
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.08);
+  color:rgba(255,255,255,.85);
+  font-size:.78rem;font-weight:500;letter-spacing:.04em;text-transform:uppercase;
+  text-decoration:none;
+  line-height:1;
+  transition:background .2s ease,border-color .2s ease;
+}
+.footer-links a:hover{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.18);}
+.footer-social{display:flex;gap:.5rem;flex-wrap:wrap;justify-content:center;}
+.footer-social a{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:.45rem;
+  padding:.55rem 1.1rem;border-radius:100px;
+  background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);
+  color:rgba(255,255,255,.75);text-decoration:none;
+  font-size:.78rem;font-weight:500;
+  line-height:1;
+  transition:background .2s ease,color .2s ease;
+}
+.footer-social a svg{display:block;flex-shrink:0;}
+.footer-social a:hover{background:rgba(255,255,255,.12);color:#fff;}
+.footer-bottom{
+  max-width:1100px;margin:2rem auto 0;padding-top:1.5rem;
+  border-top:1px solid rgba(255,255,255,.08);
+  display:flex;justify-content:space-between;flex-wrap:wrap;gap:.75rem;
+}
+.footer-copy,.footer-loc{font-size:.75rem;color:rgba(255,255,255,.5);letter-spacing:.01em;font-weight:400;}
+@media(max-width:600px){
+  footer{padding:2.5rem 1.25rem 1.5rem!important;}
+  .footer-bottom{flex-direction:column;align-items:center;text-align:center;}
+}
+
+/* ===== GLOBAL RESPONSIVE ===== */
+/* Nav switches to hamburger at 760px (aligned with inline mobile rules in index.html
+   to prevent the 761–900px conflict where both desktop nav AND hamburger were showing). */
+@media(max-width:760px){
+  nav{padding:0 1.25rem;}
+  .nav-links{display:none;}
+  .nav-li{display:none;}
+  .nav-cta{display:none;}
+  .nav-mobile-blog{display:none !important;}
+  .menu-text-btn{display:block;}
+}
+/* Footer stays at 900px — different concern, no nav conflict. */
+@media(max-width:900px){
+  footer{padding:2rem 1.5rem;}
+  .footer-top{grid-template-columns:1fr;gap:1.5rem;text-align:center;}
+  .footer-links{justify-content:center;flex-wrap:wrap;gap:.5rem;}
+  .footer-links a{min-height:44px;display:inline-flex;align-items:center;padding:.5rem .75rem;}
+  .footer-social{justify-content:center;gap:.5rem;}
+  .footer-social a{min-height:44px;padding:.5rem .75rem;}
+}
+
+
+/* ════════════════════════════════════════════════════════════ */
+/* ═══ iOS 27 / LIQUID GLASS NAV — applied site-wide ════════ */
+/* ════════════════════════════════════════════════════════════ */
+
+nav{position:fixed!important;top:1rem!important;left:50%!important;right:auto!important;bottom:auto!important;transform:translateX(-50%)!important;
+  width:max-content!important;max-width:calc(100vw - 2rem)!important;
+  background:rgba(28,26,22,.32)!important;
+  backdrop-filter:blur(40px) saturate(190%)!important;
+  -webkit-backdrop-filter:blur(40px) saturate(190%)!important;
+  border-radius:100px!important;padding:.55rem .85rem .55rem 1.5rem!important;
+  border:1px solid rgba(255,255,255,.18)!important;
+  border-bottom:1px solid rgba(255,255,255,.18)!important;
+  box-shadow:0 1px 0 rgba(255,255,255,.12) inset,0 8px 32px rgba(0,0,0,.18),0 1px 2px rgba(0,0,0,.08)!important;
+  height:auto!important;transition:all .35s cubic-bezier(.2,0,.2,1)!important;
+  display:inline-flex!important;align-items:center!important;justify-content:flex-start!important;
+  gap:1.5rem!important;flex-wrap:nowrap!important;}
+nav .nav-logo img{height:22px!important;width:auto!important;transition:height .35s cubic-bezier(.2,0,.2,1)!important;opacity:1!important;}
+nav .nav-links{gap:1.4rem!important;margin:0!important;padding:0!important;display:flex!important;align-items:center!important;flex-wrap:nowrap!important;}
+nav .nav-links li{white-space:nowrap!important;list-style:none!important;}
+nav .nav-links li a{text-transform:none!important;letter-spacing:.005em!important;font-size:.86rem!important;font-weight:500!important;color:rgba(255,255,255,.88)!important;padding:.4rem .9rem!important;border-radius:100px!important;border:1px solid transparent!important;transition:color .25s ease,background .25s ease,border-color .25s ease,backdrop-filter .25s ease!important;white-space:nowrap!important;text-decoration:none!important;}
+nav .nav-links li a::after{display:none!important;}
+nav .nav-links li a:hover,nav .nav-links li a.active{
+  color:#fff!important;
+  background:rgba(255,255,255,.12)!important;
+  border:1px solid rgba(255,255,255,.18)!important;
+  backdrop-filter:blur(20px) saturate(180%)!important;
+  -webkit-backdrop-filter:blur(20px) saturate(180%)!important;
+  box-shadow:0 1px 0 rgba(255,255,255,.2) inset!important;
+  text-decoration:none!important;
+}
+nav .nav-right{gap:.9rem!important;display:flex!important;align-items:center!important;flex-shrink:0!important;}
+nav .nav-cta{padding:.55rem 1.1rem!important;letter-spacing:.01em!important;font-size:.82rem!important;font-weight:500!important;text-transform:none!important;border-radius:100px!important;background:rgba(255,255,255,.14)!important;border:1px solid rgba(255,255,255,.2)!important;backdrop-filter:blur(20px) saturate(180%)!important;-webkit-backdrop-filter:blur(20px) saturate(180%)!important;white-space:nowrap!important;flex-shrink:0!important;line-height:1.2!important;display:inline-flex!important;align-items:center!important;color:#fff!important;text-decoration:none!important;}
+nav .nav-cta:hover{background:rgba(255,255,255,.22)!important;border-color:rgba(255,255,255,.3)!important;}
+nav.scrolled{background:rgba(28,26,22,.45)!important;padding:.45rem 1.1rem!important;transform:translateX(-50%) scale(.95)!important;}
+nav.scrolled .nav-logo img{height:18px!important;}
+
+/* Mobile menu — iOS 27 glass sheet */
+@media(max-width:760px){
+  nav{padding:.55rem 1rem!important;gap:0!important;justify-content:space-between!important;}
+  nav .nav-links,nav .nav-right,nav .nav-cta{display:none!important;}
+}
+.mobile-menu-card{
+  position:absolute!important;
+  top:calc(1rem + 56px)!important;
+  right:1rem!important;left:auto!important;bottom:auto!important;
+  background:rgba(28,26,22,.62)!important;
+  backdrop-filter:blur(40px) saturate(180%)!important;
+  -webkit-backdrop-filter:blur(40px) saturate(180%)!important;
+  border:1px solid rgba(255,255,255,.14)!important;
+  border-radius:24px!important;padding:.4rem 0!important;
+  box-shadow:0 1px 0 rgba(255,255,255,.12) inset,0 16px 48px rgba(0,0,0,.3),0 32px 80px rgba(0,0,0,.18)!important;
+  overflow:hidden!important;width:220px!important;
+}
+.mobile-menu-card::before{
+  content:""!important;position:absolute!important;top:0!important;left:0!important;right:0!important;
+  height:35%!important;
+  background:linear-gradient(180deg,rgba(255,255,255,.1) 0%,rgba(255,255,255,.01) 70%,transparent 100%)!important;
+  pointer-events:none!important;z-index:1!important;
+}
+.mobile-menu-card a{
+  padding:.85rem 1.3rem!important;
+  font-size:.95rem!important;font-weight:500!important;
+  color:rgba(255,255,255,.92)!important;
+  border:none!important;
+  position:relative!important;z-index:2!important;
+  transition:background .15s ease!important;
+  letter-spacing:.005em!important;text-transform:none!important;
+}
+.mobile-menu-card a:hover,.mobile-menu-card a:active{background:rgba(255,255,255,.12)!important;}
+.mobile-menu-card a:not(:last-child){border-bottom:1px solid rgba(255,255,255,.09)!important;}
+.mobile-menu-card a:last-child{
+  color:#a0c4e8!important;font-weight:600!important;
+  border-top:1px solid rgba(255,255,255,.12)!important;
+  margin-top:.25rem!important;padding-top:1rem!important;
+}
+.mobile-menu{
+  background:rgba(0,0,0,.25)!important;
+  backdrop-filter:blur(8px)!important;
+  -webkit-backdrop-filter:blur(8px)!important;
+}
+
+/* Medium screens 761-1280: hide social icons so nav-cta fits */
+@media(min-width:761px) and (max-width:1280px){
+  nav{gap:1.1rem!important;padding:.55rem .8rem .55rem 1.3rem!important;}
+  nav .nav-links{gap:1.1rem!important;}
+  nav .nav-right > .nav-li{display:none!important;}
+  nav .nav-cta{font-size:.78rem!important;padding:.5rem .95rem!important;}
+}
+/* Narrow desktop: tighten nav-links further so everything fits the pill */
+@media(min-width:761px) and (max-width:960px){
+  nav .nav-links{gap:.85rem!important;}
+  nav .nav-links li a{font-size:.82rem!important;padding:.2rem .25rem!important;}
+}
+
+/* ═══ NAV PILL SHRINK-TO-FIT — final override 2026-06-26 ═══
+   Placed last in the cascade to guarantee these win over any leftover legacy rules.
+   Applies to all pages loading styles.css. Pages with their own inline nav rules
+   (index.html, pay.html, index-glass.html, pay-glass.html) repeat this block inline. */
+nav{
+  width:max-content!important;
+  max-width:calc(100vw - 2rem)!important;
+  right:auto!important;
+  bottom:auto!important;
+  display:inline-flex!important;
+  justify-content:flex-start!important;
+}
+@media(max-width:760px){
+  nav{
+    width:auto!important;
+    min-width:38vw!important;
+    justify-content:space-between!important;
+    gap:0!important;
+  }
+}
+
+/* ════════════════════════════════════════════════════════════ */
+/* ═══ iOS 27 LIQUID GLASS — global buttons + form fields ════ */
+/* Applies to every page that loads styles.css. Pages with     */
+/* inline button rules (index/about/pay) override locally.     */
+/* ════════════════════════════════════════════════════════════ */
+
+/* Liquid-glass primary buttons */
+.btn-dark,.btn-cta,.cta-btn,.btn-accent,.btn-submit,.btn-primary{
+  background:linear-gradient(180deg,rgba(127,160,195,.92),rgba(61,107,154,.94))!important;
+  color:#fff!important;
+  border:1px solid rgba(255,255,255,.42)!important;
+  border-radius:100px!important;
+  padding:.85rem 1.65rem!important;
+  font-weight:500!important;
+  letter-spacing:.005em!important;
+  backdrop-filter:blur(20px) saturate(180%)!important;
+  -webkit-backdrop-filter:blur(20px) saturate(180%)!important;
+  box-shadow:
+    0 1px 0 rgba(255,255,255,.5) inset,
+    0 -1px 0 rgba(28,26,22,.1) inset,
+    0 6px 18px -4px rgba(61,107,154,.32),
+    0 2px 6px rgba(28,26,22,.06)!important;
+  position:relative;
+  transition:transform .25s cubic-bezier(.2,0,.2,1),box-shadow .25s ease,background .25s ease!important;
+}
+.btn-dark:hover,.btn-cta:hover,.cta-btn:hover,.btn-accent:hover,.btn-submit:hover,.btn-primary:hover{
+  background:linear-gradient(180deg,rgba(140,172,205,.96),rgba(75,121,168,.96))!important;
+  box-shadow:
+    0 1px 0 rgba(255,255,255,.55) inset,
+    0 -1px 0 rgba(28,26,22,.1) inset,
+    0 10px 26px -6px rgba(61,107,154,.4),
+    0 3px 8px rgba(28,26,22,.08)!important;
+  transform:translateY(-1px)!important;
+}
+
+/* Liquid-glass form fields */
+input[type="text"],input[type="email"],input[type="tel"],input[type="url"],input[type="number"],
+input[type="search"],input[type="password"],textarea,select{
+  background:rgba(255,255,255,.55)!important;
+  border:1px solid rgba(255,255,255,.5)!important;
+  backdrop-filter:blur(14px) saturate(180%)!important;
+  -webkit-backdrop-filter:blur(14px) saturate(180%)!important;
+  border-radius:14px!important;
+  padding:.85rem 1rem!important;
+  color:var(--text)!important;
+  font-family:"DM Sans",sans-serif!important;
+  font-size:.92rem!important;
+  box-shadow:
+    0 1px 0 rgba(255,255,255,.6) inset,
+    0 1px 2px rgba(28,26,22,.04)!important;
+  transition:background .2s ease,border-color .2s ease,box-shadow .2s ease!important;
+}
+input[type="text"]:focus,input[type="email"]:focus,input[type="tel"]:focus,input[type="url"]:focus,
+input[type="number"]:focus,input[type="search"]:focus,input[type="password"]:focus,textarea:focus,select:focus{
+  outline:none!important;
+  background:rgba(255,255,255,.72)!important;
+  border-color:rgba(127,160,195,.55)!important;
+  box-shadow:
+    0 1px 0 rgba(255,255,255,.7) inset,
+    0 0 0 3px rgba(127,160,195,.18),
+    0 2px 4px rgba(28,26,22,.04)!important;
+}
+input::placeholder,textarea::placeholder{color:rgba(28,26,22,.4)!important;}
+
+/* Active nav state — strengthen the inner rim glow */
+nav .nav-links li a.active{
+  box-shadow:
+    0 1px 0 rgba(255,255,255,.35) inset,
+    0 0 0 1px rgba(255,255,255,.2) inset,
+    0 0 18px rgba(255,255,255,.12)!important;
+}

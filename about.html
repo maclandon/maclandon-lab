@@ -37,8 +37,8 @@
 
   .hero{min-height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;
     text-align:center;padding:110px 24px 40px;position:relative;overflow:hidden}
-  .herovid{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;
-    opacity:.14;filter:saturate(.7) contrast(1.05)}
+  .herovid{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 12%;z-index:0;
+    opacity:.16;filter:saturate(.7) contrast(1.05)}
   .hero::after{content:"";position:absolute;inset:0;z-index:1;
     background:radial-gradient(80% 70% at 50% 45%,transparent 30%,rgba(7,7,9,.88) 82%),
                linear-gradient(180deg,rgba(7,7,9,.55),transparent 30%,transparent 68%,#070709)}
@@ -48,6 +48,7 @@
     -webkit-background-clip:text;background-clip:text;color:transparent;animation:shimmer 9s linear infinite}
   @keyframes shimmer{to{background-position:200% 0}}
   .hero p{margin-top:20px;font-size:clamp(17px,2.2vw,22px);color:var(--mute);max-width:44ch}
+  .own-line{display:inline-block;margin-top:10px;color:var(--ink);font-weight:600}
   .cue{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);width:22px;height:36px;
     border:1.5px solid rgba(255,255,255,.22);border-radius:12px}
   .cue::before{content:"";position:absolute;top:7px;left:50%;transform:translateX(-50%);width:3px;height:7px;
@@ -88,14 +89,15 @@
   .reveal{opacity:0;transform:translateY(38px);filter:blur(6px);
     transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1),filter .9s}
   .reveal.in{opacity:1;transform:none;filter:none}
-  .how{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:44px}
-  .how .h-card{border-radius:18px;padding:26px 26px;background:#101016;border:1px solid var(--line);
-    box-shadow:0 24px 70px rgba(0,0,0,.45)}
-  .how .h-card h4{font-size:19px;font-weight:800;letter-spacing:-.015em;margin-bottom:8px}
-  .how .h-card h4 em{font-style:normal;background:var(--rainbow);background-size:200% 100%;
-    -webkit-background-clip:text;background-clip:text;color:transparent;animation:shimmer 9s linear infinite}
-  .how .h-card p{font-size:14.5px;color:var(--mute);line-height:1.6}
-  @media(max-width:760px){.how{grid-template-columns:1fr;gap:10px}}
+  .story{margin-top:40px;display:flex;flex-direction:column;gap:26px;max-width:62ch}
+  .story p{font-size:clamp(16px,1.9vw,19px);color:var(--mute);line-height:1.65}
+  .story .pop{display:inline-block;margin-top:10px;color:var(--ink);font-weight:700}
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:44px}
+  .stepc{border-radius:18px;padding:26px 24px;background:#101016;border:1px solid var(--line);box-shadow:0 24px 70px rgba(0,0,0,.45)}
+  .stepc .n{font-size:12px;font-weight:800;letter-spacing:.12em;color:var(--accent);margin-bottom:10px}
+  .stepc h4{font-size:19px;font-weight:800;letter-spacing:-.015em;margin-bottom:8px}
+  .stepc p{font-size:14.5px;color:var(--mute);line-height:1.6}
+  @media(max-width:760px){.steps{grid-template-columns:1fr;gap:10px}}
   .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:44px}
   .stat{border-radius:18px;padding:26px 24px;background:#101016;border:1px solid var(--line);
     box-shadow:0 24px 70px rgba(0,0,0,.45)}
@@ -130,7 +132,7 @@
 <header class="hero">
   <video class="herovid" autoplay muted loop playsinline src="assets/subway.mp4"></video>
   <h1>Hi, I'm <em>Mac</em>.</h1>
-  <p>I build websites, brands, and the systems behind them for small businesses. All of it, myself.</p>
+  <p>I build websites, brands, and the systems behind them for small businesses.<br><span class="own-line">All of it, myself.</span></p>
   <div class="cue"></div>
 </header>
 
@@ -166,14 +168,27 @@
 
 <section class="band">
   <div class="reveal">
-    <div class="k">How I work</div>
-    <h2>Built into the wiring.</h2>
+    <div class="k">My story</div>
+    <h2>I got here by fixing what wasn't working.</h2>
   </div>
-  <div class="how">
-    <div class="h-card reveal"><h4>Quiet hours, <em>deep work</em>.</h4><p>My best work happens late, alone, with the door closed. No standups, no performance. Long unbroken hours where the details get the attention they deserve. The craft shows up in the parts most people never notice.</p></div>
-    <div class="h-card reveal"><h4>It's <em>personal</em>.</h4><p>I don't know how to build from a distance. If your business is in my hands, I carry it like it's mine. What goes out into the world with your name on it has my care baked into it, because that's the only way I know how to make things.</p></div>
-    <div class="h-card reveal"><h4>Show, <em>then tell</em>.</h4><p>I'd rather build the thing and put it in front of you than pitch you a deck about it. Proof first, talk second. Every client relationship I have started with something I had already made.</p></div>
-    <div class="h-card reveal"><h4>Deep, <em>not wide</em>.</h4><p>A few clients at a time, known well. I'd rather understand one business completely, how it earns, who it serves, where it leaks, than juggle ten from the surface.</p></div>
+  <div class="story">
+    <p class="reveal">My path into digital systems didn't start in a design school.<br><span class="pop">It started in a Long Island tax office.</span></p>
+    <p class="reveal">I'd just come out of an M.S. in Taxation and a stint at Grant Thornton, a top-10 global accounting firm, when I found myself rebuilding a private tax practice from the inside. Paper intake became digital onboarding. Missed calls became automated scheduling. Filing cabinets became client portals.</p>
+    <p class="reveal">The instinct to build wasn't new. From age 12 I ran a YouTube channel through the early creator economy. Hundreds of thousands of subscribers. Millions of views.<br><span class="pop">I learned how attention works by earning it.</span></p>
+    <p class="reveal">When I rebuilt that tax practice with digital intake, online payments, a client portal, and automated workflows, something clicked. The design decisions weren't aesthetic.<br><span class="pop">They were operational.</span></p>
+    <p class="reveal">Since then I've applied that same framework to e-commerce brands, service businesses, and solo operators. I'm based in New York City and work remotely nationwide. I don't subcontract. I don't hand off. I don't disappear after kickoff.<br><span class="pop">I get in, I understand your operation, and I build.</span></p>
+  </div>
+</section>
+
+<section class="band">
+  <div class="reveal">
+    <div class="k">The process</div>
+    <h2>Three steps. No surprises.</h2>
+  </div>
+  <div class="steps">
+    <div class="stepc reveal"><div class="n">01</div><h4>Audit</h4><p>A deep dive into what's working, what's broken, and where you're losing time and money. You get a clear roadmap of exactly what needs to change, and in what order.</p></div>
+    <div class="stepc reveal"><div class="n">02</div><h4>Design &amp; Build</h4><p>I get into your platforms and build. New systems, automations, funnels, whatever the audit revealed. You stay focused on your business.</p></div>
+    <div class="stepc reveal"><div class="n">03</div><h4>Launch &amp; Optimize</h4><p>We launch, make sure everything sticks, and optimize based on what the first month teaches us. You walk away with more time and better results.</p></div>
   </div>
 </section>
 
@@ -191,9 +206,9 @@
 
 <section class="cta" id="contact">
   <div class="reveal">
-    <h2>Tell me about your business.</h2>
-    <p>The real one. That's where the good sites come from.</p>
-    <a href="#">Start the conversation</a>
+    <h2>Ready to work together?</h2>
+    <p>Let's build something that actually works.<br><span class="own-line">Book a free 30 minute call.</span></p>
+    <a href="#">Book a Call</a>
   </div>
 </section>
 

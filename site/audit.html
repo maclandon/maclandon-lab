@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Free Operations Audit | Mac Landon</title>
+<meta name="description" content="8 questions. Get an instant score on where your business is leaking time and money, and exactly what to fix first.">
+<meta property="og:title" content="Free Digital Audit — Mac Landon">
+<meta property="og:description" content="8 questions. See exactly where your business is losing time to manual systems.">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%231C1A16'/%3E%3Ctext x='50%25' y='68%25' text-anchor='middle' font-size='16' font-family='Fraunces, serif' fill='%237fa0c3' font-weight='700'%3EML%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,700;0,9..144,900;1,9..144,700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css?v=16.6">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --bg:#E8E4DC;--bg2:#DDD9D0;--white:#FAFAF7;--card:#F5F2EC;
+  --border:#D0CAC0;--text:#1C1A16;--text-mid:#48443C;--text-muted:#7A7468;
+  --accent:#7fa0c3;--accent2:#3D6B9A;--dark:#1C1A16;--dark2:#2A2720;
+  --good:#5e9e5e;--warn:#c97c4a;--bad:#c25656;
+}
+body{font-family:"DM Sans",sans-serif;background:var(--bg);color:var(--text);min-height:100vh;-webkit-font-smoothing:antialiased;}
+
+nav{position:sticky;top:0;z-index:50;height:56px;padding:0 2rem;display:flex;align-items:center;justify-content:space-between;background:rgba(28,26,22,0.92);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,.06);}
+.nav-logo{display:flex;align-items:center;gap:.75rem;color:#fff;text-decoration:none;font-family:"Fraunces",serif;font-weight:900;font-size:1.05rem;}
+.nav-logo span{font-size:.68rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.65);font-family:"DM Sans",sans-serif;border-left:1px solid rgba(255,255,255,.15);padding-left:.75rem;}
+
+.wrap{max-width:680px;margin:0 auto;padding:3.5rem 2rem 5rem;}
+
+/* INTRO */
+.intro{text-align:center;margin-bottom:2.5rem;}
+.eyebrow{font-size:.68rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:1rem;display:inline-flex;align-items:center;gap:.5rem;}
+.eyebrow::before,.eyebrow::after{content:"";width:14px;height:1.5px;background:var(--accent);}
+h1{font-family:"Fraunces",serif;font-size:clamp(2rem,4vw,3rem);font-weight:900;line-height:1.05;letter-spacing:-.025em;margin-bottom:1rem;}
+h1 em{font-style:italic;color:var(--accent);font-weight:700;}
+.sub{font-size:1rem;color:var(--text-muted);font-weight:300;line-height:1.65;max-width:520px;margin:0 auto 1.75rem;}
+
+/* PROGRESS */
+.progress{display:flex;gap:.35rem;margin-bottom:2rem;padding:0 .25rem;}
+.progress-dot{flex:1;height:5px;background:var(--border);border-radius:3px;transition:background .3s;}
+.progress-dot.done{background:var(--accent);}
+.progress-dot.current{background:var(--text);}
+
+/* QUESTION CARD */
+.q-card{background:var(--white);border:1px solid var(--border);border-radius:18px;padding:2.25rem;box-shadow:0 4px 30px rgba(28,26,22,.05);}
+.q-num{font-size:.7rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted);margin-bottom:.85rem;}
+.q-text{font-family:"Fraunces",serif;font-size:1.4rem;font-weight:700;line-height:1.3;margin-bottom:1.5rem;}
+.options{display:flex;flex-direction:column;gap:.65rem;}
+.opt{display:flex;align-items:flex-start;gap:.85rem;padding:1rem 1.15rem;background:var(--card);border:1px solid var(--border);border-radius:12px;cursor:pointer;transition:all .15s;font-size:.92rem;color:var(--text-mid);text-align:left;}
+.opt:hover{border-color:var(--accent);background:var(--white);transform:translateX(2px);}
+.opt.selected{border-color:var(--accent);background:rgba(127,160,195,.08);color:var(--text);}
+.opt-radio{flex-shrink:0;width:18px;height:18px;border-radius:50%;border:1.5px solid var(--border);margin-top:.1rem;display:flex;align-items:center;justify-content:center;transition:border-color .15s;}
+.opt.selected .opt-radio{border-color:var(--accent);}
+.opt.selected .opt-radio::after{content:"";width:9px;height:9px;border-radius:50%;background:var(--accent);}
+
+.nav-btns{display:flex;justify-content:space-between;margin-top:1.5rem;}
+.btn{font-family:"DM Sans",sans-serif;font-size:.88rem;font-weight:500;padding:.75rem 1.6rem;border-radius:6px;border:none;cursor:pointer;transition:background .15s,opacity .15s;}
+.btn-primary{background:var(--dark);color:#fff;}
+.btn-primary:hover{background:var(--dark2);}
+.btn-primary:disabled{opacity:.4;cursor:not-allowed;}
+.btn-back{background:transparent;color:var(--text-muted);}
+.btn-back:hover{color:var(--text);}
+
+/* PROCESSING */
+.processing{background:var(--white);border:1px solid var(--border);border-radius:18px;padding:3rem 2.5rem;text-align:center;display:none;}
+.processing-spinner{width:40px;height:40px;border:3px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 1.25rem;}
+@keyframes spin{to{transform:rotate(360deg);}}
+.processing h2{font-family:"Fraunces",serif;font-size:1.4rem;font-weight:700;margin-bottom:.5rem;}
+.processing p{font-size:.9rem;color:var(--text-muted);font-weight:300;}
+
+/* EMAIL CAPTURE */
+.capture{background:var(--white);border:1px solid var(--border);border-radius:18px;padding:2.5rem;text-align:center;display:none;}
+.capture h2{font-family:"Fraunces",serif;font-size:1.6rem;font-weight:700;margin-bottom:.6rem;line-height:1.2;}
+.capture h2 em{font-style:italic;color:var(--accent);}
+.capture p{font-size:.95rem;color:var(--text-muted);font-weight:300;margin-bottom:1.75rem;line-height:1.6;}
+.capture-proof{font-size:.78rem;color:var(--text-muted);margin-top:.85rem;font-weight:300;}
+.fields{display:flex;flex-direction:column;gap:.75rem;text-align:left;max-width:380px;margin:0 auto;}
+.field{display:flex;flex-direction:column;gap:.35rem;}
+.field label{font-size:.7rem;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--text-muted);}
+.field input{font-family:"DM Sans",sans-serif;font-size:.92rem;color:var(--text);background:var(--card);border:1px solid var(--border);border-radius:8px;padding:.7rem .9rem;outline:none;transition:border-color .15s,box-shadow .15s;}
+.field input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(127,160,195,.15);}
+.honeypot{position:absolute;left:-9999px;}
+.btn-submit{margin-top:.75rem;width:100%;background:var(--accent);color:#fff;font-size:.95rem;font-weight:500;padding:.85rem;border-radius:6px;border:none;cursor:pointer;transition:background .15s;}
+.btn-submit:hover{background:var(--accent2);}
+.btn-submit:disabled{background:var(--text-muted);cursor:wait;}
+
+/* RESULTS */
+.results{background:var(--white);border:1px solid var(--border);border-radius:18px;overflow:hidden;display:none;}
+.score-band{padding:2.5rem 2rem;text-align:center;color:#fff;}
+.score-band.zone-good{background:linear-gradient(135deg,#5e9e5e 0%,#4a8a4a 100%);}
+.score-band.zone-warn{background:linear-gradient(135deg,#c97c4a 0%,#a86438 100%);}
+.score-band.zone-bad{background:linear-gradient(135deg,#c25656 0%,#a14040 100%);}
+.score-num{font-family:"Fraunces",serif;font-size:4.5rem;font-weight:900;line-height:1;margin-bottom:.25rem;}
+.score-num span{font-size:1.6rem;opacity:.6;font-weight:700;}
+.score-label{font-size:.78rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;opacity:.85;margin-bottom:.5rem;}
+.score-context{font-size:.88rem;opacity:.8;margin-bottom:.6rem;font-weight:300;font-style:italic;}
+.score-headline{font-family:"Fraunces",serif;font-size:1.4rem;font-weight:700;font-style:italic;}
+.results-body{padding:2rem 2.25rem;}
+.results-body h3{font-family:"Fraunces",serif;font-size:1.15rem;font-weight:700;margin-bottom:.6rem;}
+.results-body p{font-size:.93rem;color:var(--text-mid);line-height:1.7;font-weight:300;margin-bottom:1rem;}
+.fix-list{list-style:none;display:flex;flex-direction:column;gap:.6rem;margin:1rem 0 1.5rem;}
+.fix-list li{display:flex;align-items:flex-start;gap:.7rem;padding:.85rem 1rem;background:var(--card);border-radius:10px;font-size:.9rem;color:var(--text-mid);font-weight:300;line-height:1.55;}
+.fix-num{flex-shrink:0;width:20px;height:20px;border-radius:50%;background:var(--accent);color:#fff;font-size:.68rem;font-weight:700;display:flex;align-items:center;justify-content:center;margin-top:.15rem;}
+.cta-band{background:var(--dark);padding:2rem 2.25rem;text-align:center;color:#fff;}
+.cta-band h3{font-family:"Fraunces",serif;font-size:1.3rem;font-weight:700;font-style:italic;margin-bottom:.6rem;}
+.cta-band p{font-size:.88rem;color:rgba(255,255,255,.55);margin-bottom:1.25rem;font-weight:300;}
+.btn-cta{display:inline-flex;align-items:center;gap:.4rem;background:var(--accent);color:#fff;font-size:.9rem;font-weight:500;padding:.8rem 1.7rem;border-radius:6px;text-decoration:none;transition:background .2s,gap .2s;}
+.btn-cta:hover{background:var(--accent2);gap:.6rem;}
+.cta-reassurance{font-size:.75rem;color:rgba(255,255,255,.35);margin-top:.75rem;}
+
+.err{background:rgba(200,100,100,.12);color:#8a3030;padding:.7rem .9rem;border-radius:7px;font-size:.82rem;margin-bottom:1rem;display:none;}
+.err.show{display:block;}
+
+@media(max-width:600px){
+  .wrap{padding:2rem 1.25rem 3rem;}
+  .q-card,.capture,.processing{padding:1.5rem;}
+  .results-body,.cta-band,.score-band{padding:1.5rem;}
+  .score-num{font-size:3.5rem;}
+}
+
+/* ════════════════════════════════════════════════════════════════════════════
+   iOS 27 / LIQUID GLASS OVERLAY — applied 2026-06-26
+   ════════════════════════════════════════════════════════════════════════════ */
+
+/* Wallpaper mesh */
+body{position:relative;}
+body::after{content:""!important;position:fixed!important;inset:0!important;z-index:-2!important;background:
+  radial-gradient(ellipse 60% 45% at 15% 14%,rgba(255,178,210,.42),transparent 55%),
+  radial-gradient(ellipse 55% 50% at 85% 20%,rgba(160,196,238,.48),transparent 55%),
+  radial-gradient(ellipse 60% 55% at 50% 78%,rgba(255,215,170,.4),transparent 55%),
+  radial-gradient(ellipse 50% 45% at 90% 80%,rgba(208,180,250,.36),transparent 50%),
+  radial-gradient(ellipse 50% 40% at 10% 80%,rgba(190,230,205,.32),transparent 55%),
+  var(--bg)!important;pointer-events:none!important;}
+
+/* Nav → floating iOS 27 pill (replacing the sticky bar) */
+nav{
+  position:fixed!important;
+  top:1rem!important;left:50%!important;right:auto!important;bottom:auto!important;
+  transform:translateX(-50%)!important;
+  width:max-content!important;max-width:calc(100vw - 2rem)!important;
+  height:auto!important;
+  padding:.55rem 1.5rem!important;
+  background:rgba(28,26,22,.32)!important;
+  backdrop-filter:blur(40px) saturate(190%)!important;
+  -webkit-backdrop-filter:blur(40px) saturate(190%)!important;
+  border-radius:100px!important;
+  border:1px solid rgba(255,255,255,.18)!important;
+  box-shadow:0 1px 0 rgba(255,255,255,.12) inset,0 8px 32px rgba(0,0,0,.18)!important;
+  z-index:100!important;
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:flex-start!important;
+  gap:.85rem!important;
+}
+.wrap{padding-top:6rem!important;}
+
+/* h1 italic accent → light blue (matches Liquid Glass dark-section emphasis) */
+h1 em{color:var(--accent2)!important;}
+
+/* Question card → glass */
+.q-card{
+  background:rgba(255,255,255,.55)!important;
+  backdrop-filter:blur(28px) saturate(180%)!important;
+  -webkit-backdrop-filter:blur(28px) saturate(180%)!important;
+  border:1px solid rgba(255,255,255,.55)!important;
+  border-radius:24px!important;
+  box-shadow:0 1px 0 rgba(255,255,255,.6) inset,0 8px 32px rgba(28,26,22,.05)!important;
+}
+
+/* Option chips → glass */
+.opt{
+  background:rgba(255,255,255,.4)!important;
+  backdrop-filter:blur(16px) saturate(170%)!important;
+  -webkit-backdrop-filter:blur(16px) saturate(170%)!important;
+  border:1px solid rgba(255,255,255,.5)!important;
+  border-radius:14px!important;
+  transition:all .15s!important;
+}
+.opt:hover{background:rgba(255,255,255,.6)!important;border-color:rgba(127,160,195,.5)!important;transform:translateX(2px)!important;}
+.opt.selected{background:rgba(127,160,195,.18)!important;border-color:rgba(127,160,195,.55)!important;}
+
+/* Processing card → glass */
+.processing,.capture{
+  background:rgba(255,255,255,.55)!important;
+  backdrop-filter:blur(28px) saturate(180%)!important;
+  -webkit-backdrop-filter:blur(28px) saturate(180%)!important;
+  border:1px solid rgba(255,255,255,.55)!important;
+  border-radius:24px!important;
+  box-shadow:0 1px 0 rgba(255,255,255,.6) inset,0 8px 32px rgba(28,26,22,.05)!important;
+}
+.capture h2 em{color:var(--accent2)!important;}
+
+/* Form fields → glass inputs */
+.field input{
+  background:rgba(255,255,255,.5)!important;
+  backdrop-filter:blur(20px) saturate(180%)!important;
+  -webkit-backdrop-filter:blur(20px) saturate(180%)!important;
+  border:1px solid rgba(255,255,255,.55)!important;
+  border-radius:14px!important;
+}
+.field input:focus{background:rgba(255,255,255,.7)!important;border-color:rgba(127,160,195,.6)!important;}
+
+/* Results card → glass shell, score bands stay vivid */
+.results{
+  background:rgba(255,255,255,.55)!important;
+  backdrop-filter:blur(28px) saturate(180%)!important;
+  -webkit-backdrop-filter:blur(28px) saturate(180%)!important;
+  border:1px solid rgba(255,255,255,.55)!important;
+  border-radius:24px!important;
+  box-shadow:0 1px 0 rgba(255,255,255,.6) inset,0 8px 32px rgba(28,26,22,.05)!important;
+}
+
+/* CTA band inside results → dark glass */
+.cta-band{
+  background:rgba(28,26,22,.85)!important;
+  backdrop-filter:blur(20px) saturate(180%)!important;
+  -webkit-backdrop-filter:blur(20px) saturate(180%)!important;
+}
+
+/* Fix-list items → soft glass chips */
+.fix-list li{
+  background:rgba(255,255,255,.5)!important;
+  backdrop-filter:blur(14px) saturate(170%)!important;
+  -webkit-backdrop-filter:blur(14px) saturate(170%)!important;
+  border:1px solid rgba(255,255,255,.55)!important;
+  border-radius:12px!important;
+}
+
+/* ─── All buttons → unified iOS 27 system (matches /index + /about) ─── */
+.btn,.btn-primary,.btn-back,.btn-submit,.btn-cta{border-radius:100px!important;}
+
+/* Primary CTAs (Take audit / Next / Submit / Book a call) → brand-blue gradient pill */
+.btn-primary,.btn-submit,.btn-cta{
+  display:inline-flex!important;align-items:center!important;justify-content:center!important;gap:.5rem!important;
+  background:linear-gradient(135deg,#7fa0c3 0%,#3D6B9A 50%,#5b8db5 100%)!important;
+  color:#fff!important;
+  padding:1rem 1.85rem!important;
+  font-size:.92rem!important;font-weight:600!important;
+  letter-spacing:.005em!important;
+  border:1px solid rgba(255,255,255,.22)!important;
+  box-shadow:0 1px 0 rgba(255,255,255,.35) inset,0 10px 28px rgba(61,107,154,.32),0 2px 6px rgba(28,26,22,.1)!important;
+  position:relative!important;overflow:hidden!important;
+  text-decoration:none!important;
+  transition:transform .25s cubic-bezier(.2,0,.2,1),box-shadow .25s ease,gap .25s ease!important;
+}
+.btn-primary::before,.btn-submit::before,.btn-cta::before{
+  content:""!important;position:absolute!important;top:0!important;left:0!important;right:0!important;height:50%!important;
+  background:linear-gradient(180deg,rgba(255,255,255,.25),rgba(255,255,255,0))!important;
+  pointer-events:none!important;border-radius:100px 100px 0 0!important;
+}
+.btn-primary:hover,.btn-submit:hover,.btn-cta:hover{
+  gap:.75rem!important;
+  transform:translateY(-1px)!important;
+  box-shadow:0 1px 0 rgba(255,255,255,.4) inset,0 14px 36px rgba(61,107,154,.4),0 4px 10px rgba(28,26,22,.12)!important;
+}
+.btn-primary:active,.btn-submit:active,.btn-cta:active{transform:scale(.98)!important;}
+.btn-primary:disabled{
+  background:rgba(127,160,195,.3)!important;
+  color:rgba(255,255,255,.6)!important;
+  box-shadow:none!important;
+  cursor:not-allowed!important;
+}
+.btn-submit:disabled{
+  background:rgba(127,160,195,.3)!important;
+  color:rgba(255,255,255,.6)!important;
+  cursor:wait!important;
+}
+
+/* Back button → glass ghost pill */
+.btn-back{
+  display:inline-flex!important;align-items:center!important;gap:.4rem!important;
+  background:rgba(255,255,255,.5)!important;
+  backdrop-filter:blur(20px) saturate(180%)!important;
+  -webkit-backdrop-filter:blur(20px) saturate(180%)!important;
+  border:1px solid rgba(255,255,255,.55)!important;
+  color:var(--text-mid)!important;
+  padding:.85rem 1.4rem!important;
+  font-size:.88rem!important;font-weight:500!important;
+  box-shadow:0 1px 0 rgba(255,255,255,.6) inset!important;
+  transition:background .2s ease,color .2s ease!important;
+}
+.btn-back:hover{background:rgba(255,255,255,.75)!important;color:var(--text)!important;}
+
+/* Mobile: nav pill adjustments */
+@media(max-width:760px){
+  nav{padding:.55rem 1rem!important;gap:.5rem!important;}
+  .wrap{padding-top:5rem!important;}
+}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-RQSZMG06BY"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-RQSZMG06BY');
+</script>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo"><img src="logo.png" alt="Mac Landon" style="height:20px;width:auto;"><span>Free Audit</span></a>
+</nav>
+
+<div class="wrap">
+
+  <!-- INTRO -->
+  <div id="intro" class="intro">
+    <div class="eyebrow">Free Operations Audit</div>
+    <h1>Most service businesses run on systems built for <em>half their volume.</em></h1>
+    <p class="sub">8 questions. Find out exactly where yours is leaking time and money, and what to fix first.</p>
+    <button class="btn btn-primary" style="font-size:.95rem;padding:.85rem 1.8rem;" onclick="startQuiz()">Take the audit &#8594;</button>
+  </div>
+
+  <!-- QUIZ -->
+  <div id="quiz" style="display:none;">
+    <div class="progress" id="progress"></div>
+    <div class="q-card">
+      <div class="q-num" id="q-num">Question 1 of 8</div>
+      <div class="q-text" id="q-text"></div>
+      <div class="options" id="options"></div>
+      <div class="nav-btns">
+        <button class="btn btn-back" id="back-btn" onclick="prev()" style="visibility:hidden;">&#8592; Back</button>
+        <button class="btn btn-primary" id="next-btn" onclick="next()" disabled>Next &#8594;</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- EMAIL CAPTURE -->
+  <div id="capture" class="capture">
+    <h2>One last step to see your <em>results.</em></h2>
+    <p>Your score, a plain-English breakdown of what it means, and your top 3 fixes ranked by impact.</p>
+    <div class="err" id="err"></div>
+    <div class="fields">
+      <div class="field"><label>Name</label><input id="f-name" type="text" autofocus placeholder="First name"></div>
+      <div class="field"><label>Email</label><input id="f-email" type="email" placeholder="you@yourbusiness.com"></div>
+      <div class="field"><label>Business name (optional)</label><input id="f-biz" type="text"></div>
+      <div class="honeypot" aria-hidden="true"><label>Website</label><input id="f-website" type="text" tabindex="-1" autocomplete="off"></div>
+      <button class="btn-submit" id="submit-btn" onclick="submit()">Show me my results &#8594;</button>
+      <p class="capture-proof">Instant results. I'll follow up only if your score suggests I can help.</p>
+    </div>
+  </div>
+
+  <!-- PROCESSING -->
+  <div id="processing" class="processing">
+    <div class="processing-spinner"></div>
+    <h2>Analyzing your answers...</h2>
+    <p>Scoring your systems against 8 operational benchmarks.</p>
+  </div>
+
+  <!-- RESULTS -->
+  <div id="results" class="results">
+    <div class="score-band" id="score-band">
+      <div class="score-label">Your Score</div>
+      <div class="score-num"><span id="r-score">0</span><span>/30</span></div>
+      <div class="score-context" id="score-context"></div>
+      <div class="score-headline" id="r-headline"></div>
+    </div>
+    <div class="results-body">
+      <h3>What this means</h3>
+      <p id="r-summary"></p>
+      <h3>Your top priorities</h3>
+      <ul class="fix-list" id="r-fixes"></ul>
+    </div>
+    <div class="cta-band">
+      <h3 id="cta-h">These are fixable. Here's how I'd do it.</h3>
+      <p id="cta-p">Free 30-min call. I'll walk through your specific gaps and tell you exactly what a build would look like.</p>
+      <a href="https://calendly.com/maclandon/30min" target="_blank" class="btn-cta">Book a free call &#8594;</a>
+      <p class="cta-reassurance">30 minutes. No pitch. You'll leave with a clear picture of what to fix first.</p>
+    </div>
+  </div>
+
+</div>
+
+<script>
+const QUESTIONS = [
+  {
+    text: "How do you currently take payments from clients?",
+    options: [
+      { label: "Mostly cash, checks, or Venmo/Zelle to my personal account", points: 4 },
+      { label: "I send invoices manually (Word, Google Docs, etc.)", points: 3 },
+      { label: "I use a basic invoicing tool (PayPal, Square, etc.)", points: 1 },
+      { label: "Stripe or similar, with auto-recurring where it makes sense", points: 0 },
+    ],
+    fix: "Set up Stripe-based invoicing with auto-pay options so money lands faster and reconciliation isn't a Sunday-night chore."
+  },
+  {
+    text: "How do new clients book or intake with you?",
+    options: [
+      { label: "They text/call/DM me and we go back and forth", points: 4 },
+      { label: "Email back-and-forth to find a time", points: 3 },
+      { label: "I have a Calendly link but no intake form", points: 2 },
+      { label: "Calendly + intake form that captures what I need", points: 0 },
+    ],
+    fix: "Connect a real intake form to your booking tool so every call lands with the info you need to actually be useful."
+  },
+  {
+    text: "Where do client documents and files live?",
+    options: [
+      { label: "My inbox, my computer, sometimes paper", points: 4 },
+      { label: "Scattered Google Drive folders", points: 3 },
+      { label: "Organized Drive/Dropbox but no client access", points: 2 },
+      { label: "Each client has their own portal or shared folder", points: 0 },
+    ],
+    fix: "Build a simple client portal so you stop being the bottleneck for 'can you resend that?'"
+  },
+  {
+    text: "How do you track leads and deals?",
+    options: [
+      { label: "In my head + scattered notes", points: 4 },
+      { label: "A spreadsheet I update sometimes", points: 3 },
+      { label: "Notion or similar with stages", points: 2 },
+      { label: "A real CRM with stages, follow-up reminders, and notes", points: 0 },
+    ],
+    fix: "Move your pipeline out of your inbox. Even a simple Airtable-based CRM stops deals from falling through the cracks."
+  },
+  {
+    text: "How do you collect reviews or testimonials?",
+    options: [
+      { label: "I don't, really", points: 4 },
+      { label: "I ask occasionally, when I remember", points: 3 },
+      { label: "I have a form but rarely send it", points: 2 },
+      { label: "Automated request after every project", points: 0 },
+    ],
+    fix: "Automate the review ask so social proof builds itself instead of being something you keep meaning to do."
+  },
+  {
+    text: "What does your website do for your business?",
+    options: [
+      { label: "I don't have one, just social media", points: 4 },
+      { label: "I have a Linktree or a dated Wix/Squarespace page", points: 3 },
+      { label: "Functional site but no clear conversion path", points: 2 },
+      { label: "Real site with clear CTAs that drive bookings", points: 0 },
+    ],
+    fix: "A site is a salesperson, not a brochure. Even a one-pager with a clear CTA outperforms a beautiful site that doesn't convert."
+  },
+  {
+    text: "How are you following up with prospects who don't book?",
+    options: [
+      { label: "I'm not. I forget about them", points: 4 },
+      { label: "Manually, when I think about it", points: 3 },
+      { label: "I have email templates but send them by hand", points: 2 },
+      { label: "Sequences that fire automatically", points: 0 },
+    ],
+    fix: "Set up a simple 3-touch follow-up sequence. Most deals close after the 4th contact. Most people give up at 1."
+  },
+  {
+    text: "Roughly how many hours a week do you spend on admin?",
+    options: [
+      { label: "10+ hours, it's eating me alive", points: 4 },
+      { label: "5-10 hours", points: 3 },
+      { label: "2-5 hours", points: 1 },
+      { label: "Less than 2, most of it's automated", points: 0 },
+    ],
+    fix: "Audit one week of your admin time and pick the single biggest leak. Fixing one workflow can save 5+ hours per week."
+  },
+];
+
+let current = 0;
+let answers = new Array(QUESTIONS.length).fill(null);
+
+const $ = id => document.getElementById(id);
+
+function startQuiz() {
+  $('intro').style.display = 'none';
+  $('quiz').style.display = 'block';
+  renderProgress();
+  renderQuestion();
+}
+
+function renderProgress() {
+  $('progress').innerHTML = QUESTIONS.map(function(_, i) {
+    let cls = 'progress-dot';
+    if (i < current) cls += ' done';
+    if (i === current) cls += ' current';
+    return '<div class="' + cls + '"></div>';
+  }).join('');
+}
+
+function renderQuestion() {
+  const q = QUESTIONS[current];
+  $('q-num').textContent = 'Question ' + (current + 1) + ' of ' + QUESTIONS.length;
+  $('q-text').textContent = q.text;
+  $('options').innerHTML = q.options.map(function(opt, i) {
+    return '<div class="opt ' + (answers[current] === i ? 'selected' : '') + '" onclick="select(' + i + ')">' +
+      '<div class="opt-radio"></div>' +
+      '<div>' + opt.label + '</div>' +
+      '</div>';
+  }).join('');
+  $('back-btn').style.visibility = current === 0 ? 'hidden' : 'visible';
+  $('next-btn').textContent = current === QUESTIONS.length - 1 ? 'See my results \u2192' : 'Next \u2192';
+  $('next-btn').disabled = answers[current] === null;
+  renderProgress();
+}
+
+function select(i) {
+  answers[current] = i;
+  renderQuestion();
+  // Auto-advance on mobile after short delay
+  if (window.innerWidth <= 600) {
+    setTimeout(function() { next(); }, 320);
+  }
+}
+
+function next() {
+  if (answers[current] === null) return;
+  if (current < QUESTIONS.length - 1) {
+    current++;
+    renderQuestion();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  } else {
+    showCapture();
+  }
+}
+
+function prev() {
+  if (current > 0) {
+    current--;
+    renderQuestion();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+}
+
+function showCapture() {
+  $('quiz').style.display = 'none';
+  $('capture').style.display = 'block';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  setTimeout(function() { $('f-name').focus(); }, 100);
+}
+
+function calcScore() {
+  return answers.reduce(function(sum, a, i) {
+    return sum + (a !== null ? QUESTIONS[i].options[a].points : 0);
+  }, 0);
+}
+
+function getZone(score) {
+  if (score >= 20) return {
+    zone: 'bad',
+    headline: 'Your systems are the bottleneck.',
+    summary: "You're running a real business on infrastructure that wasn't designed for the volume you're doing. Every week you wait, you're losing hours, leads, and revenue to broken processes. Most of this is fixable in days, not months.",
+    context: "Your admin overhead is eating into billable time every single week.",
+    ctaH: 'These are fixable. Here\'s how I\'d do it.',
+    ctaP: "Free 30-min call. I'll walk through exactly which of these to fix first and what it would take to build it. Most clients see results in the first two weeks.",
+    ctaReassurance: "30 minutes. No pitch. You'll leave knowing exactly what to do next."
+  };
+  if (score >= 10) return {
+    zone: 'warn',
+    headline: "You're leaving money on the table.",
+    summary: "You've got the basics covered, but there are real gaps that are costing you. The bigger you grow, the more these gaps compound. Closing them now is a lot easier than scrambling to fix them mid-scale.",
+    context: "A few targeted fixes could recover significant time and revenue.",
+    ctaH: 'These gaps are smaller than you think to close.',
+    ctaP: "Free 30-min call. I'll show you exactly what's leaking and what a focused one-week build would look like.",
+    ctaReassurance: "30 minutes. No pitch. You'll leave with a clear picture of what to fix first."
+  };
+  return {
+    zone: 'good',
+    headline: "Your foundation is solid.",
+    summary: "You're ahead of most businesses at your stage. The gaps you have are optimization problems, not survival problems. A focused one-week project could take you from working well to running without you.",
+    context: "Small optimizations from here have an outsized effect.",
+    ctaH: 'Solid foundation. Let\'s make it run without you.',
+    ctaP: "Free 30-min call. Even well-built systems have one or two leaks worth closing.",
+    ctaReassurance: "30 minutes. No pitch. You'll leave with a clear picture of what to fix first."
+  };
+}
+
+function getTopFixes() {
+  const scored = QUESTIONS.map(function(q, i) {
+    return {
+      fix: q.fix,
+      points: answers[i] !== null ? q.options[answers[i]].points : 0
+    };
+  });
+  scored.sort(function(a, b) { return b.points - a.points; });
+  return scored.filter(function(s) { return s.points >= 2; }).slice(0, 3).map(function(s) { return s.fix; });
+}
+
+async function submit() {
+  const name = $('f-name').value.trim();
+  const email = $('f-email').value.trim();
+  if (!name || !email) {
+    showErr('Name and email are required.');
+    return;
+  }
+
+  $('submit-btn').disabled = true;
+  $('submit-btn').textContent = 'Analyzing...';
+
+  const score = calcScore();
+  const zone = getZone(score);
+  const fixes = getTopFixes();
+  const answersText = QUESTIONS.map(function(q, i) {
+    const a = answers[i];
+    return (i + 1) + '. ' + q.text + '\n   \u2192 ' + (a !== null ? q.options[a].label : '(skipped)') + ' [+' + (a !== null ? q.options[a].points : 0) + ']';
+  }).join('\n\n');
+
+  $('capture').style.display = 'none';
+  $('processing').style.display = 'block';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  try {
+    const results = await Promise.all([
+      fetch('/api/assessment', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: name,
+          email: email,
+          business: $('f-biz').value.trim(),
+          score: score + '/30',
+          summary: zone.headline + ' ' + zone.summary,
+          answers: answersText,
+          website: $('f-website').value,
+        })
+      }),
+      new Promise(function(resolve) { setTimeout(resolve, 1800); })
+    ]);
+    const r = results[0];
+    if (!r.ok) throw new Error(await r.text());
+    showResults(score, zone, fixes);
+  } catch (e) {
+    $('processing').style.display = 'none';
+    $('capture').style.display = 'block';
+    showErr('Could not save: ' + e.message);
+    $('submit-btn').disabled = false;
+    $('submit-btn').textContent = 'Show me my results \u2192';
+  }
+}
+
+function showErr(msg) {
+  $('err').textContent = msg;
+  $('err').className = 'err show';
+}
+
+function animateScore(target, el) {
+  const duration = 900;
+  const start = performance.now();
+  function step(now) {
+    const progress = Math.min((now - start) / duration, 1);
+    const eased = 1 - Math.pow(1 - progress, 3);
+    el.textContent = Math.round(eased * target);
+    if (progress < 1) requestAnimationFrame(step);
+    else el.textContent = target;
+  }
+  requestAnimationFrame(step);
+}
+
+function showResults(score, zone, fixes) {
+  $('processing').style.display = 'none';
+  $('results').style.display = 'block';
+  $('score-band').className = 'score-band zone-' + zone.zone;
+  $('score-context').textContent = zone.context;
+  $('r-headline').textContent = zone.headline;
+  $('r-summary').textContent = zone.summary;
+  $('cta-h').textContent = zone.ctaH;
+  $('cta-p').textContent = zone.ctaP;
+  $('cta-reassurance') && ($('cta-reassurance').textContent = zone.ctaReassurance);
+
+  const scoreEl = $('r-score');
+  scoreEl.textContent = '0';
+  animateScore(score, scoreEl);
+
+  $('r-fixes').innerHTML = fixes.length
+    ? fixes.map(function(f, i) {
+        return '<li><span class="fix-num">' + (i + 1) + '</span><span>' + f + '</span></li>';
+      }).join('')
+    : '<li><span class="fix-num">1</span><span>You\'re in great shape. A tune-up rather than a rebuild is all you need.</span></li>';
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+</body>
+</html>
